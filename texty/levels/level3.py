@@ -15,6 +15,7 @@ runden Raum mit 4 Ecken wieder. In jeder eine Katzenklappe. Ein Reisebüro also.
         super().__init__(description,
                          actions={},
                          objects={})
+        self.background = 'level3.jpg'
 
     def do_raw_input(self, text):
         print(text)

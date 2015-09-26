@@ -19,6 +19,7 @@ Schwanzes, tanzt er über die Straße.
         def exit(won=False):
             if won:
                 self.description = 'Flatsch'
+                self.background = 'dog_in_car.jpg'
             else:
                 self.description = 'Du hast verloren'
         return Game(

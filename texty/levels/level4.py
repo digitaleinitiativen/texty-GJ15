@@ -16,6 +16,7 @@ weiß nicht weiter und macht, was er immer macht, wenn er nicht weiter weiß.'''
                              'tafel': [],
                              'planet': [],
                          })
+        self.background = 'level4.jpg'
 
     def schnurren(self, obj=None):
         self.description = '''
