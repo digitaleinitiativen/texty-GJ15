@@ -1,4 +1,5 @@
 ﻿import os
+import sys
 import cocos
 from cocos.actions import *
 from background import Background
@@ -22,11 +23,12 @@ class Animation(cocos.layer.Layer):
 
     is_event_handler = True     #: enable pyglet's events
 
-    def __init__(self):
+    def __init__(self,exit_callback):
 
         super(Animation, self).__init__()
 
         self.keys_pressed = set()
+        self.exit = exit_callback
 
         self.spaceship_move = None
         self.spaceship_move_duration = 2
@@ -172,24 +174,21 @@ class Animation(cocos.layer.Layer):
             self.shot()
             self.keys_pressed.remove(pyglet.window.key.SPACE)
         if pyglet.window.key.ESCAPE in self.keys_pressed :
-            game.exit()
+            self.exit()
        
 
 class SpaceInvader():
     def __init__(self,exit_callback):
-        self.animation_layer = Animation()
+        self.animation_layer = Animation(exit_callback)
         self.background_layer = Background()
 
         self.background_layer.image = 'space.jpg'
-        self.exit = exit_callback
 
     def main_scene(self):
         return cocos.scene.Scene(self.background_layer,self.animation_layer)
 
 
 def main():
-    global game
-
     here = os.path.abspath(os.path.dirname(__file__))
     graphics = os.path.join(here, 'graphics')
 
@@ -199,7 +198,7 @@ def main():
 
     cocos.director.director.init()
 
-    game = SpaceInvader()
+    game = SpaceInvader(sys.exit)
 
     cocos.director.director.run(game.main_scene())
 
