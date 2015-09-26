@@ -131,7 +131,7 @@ class CatchLettersGame():
 
 
 def main():
-    cocos.director.director.init()
+    cocos.director.director.init(width=800, height=640)
     cat = CatDisplay()
     letter = LetterDisplay()
     exit_callback = None
