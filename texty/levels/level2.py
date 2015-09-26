@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
+import sys
 from texty.graph import Node
+from subprocess import Popen
+
+
+here = os.path.dirname(__file__)
+
 
 class Level(Node):
 
@@ -24,7 +31,9 @@ sich Herr Katz und stürzt sich mit einem “Auf und Drauf” ins Getümmel als 
                          })
 
     def spielen(self, obj=None):
-        pass
+        space_invaders = os.path.join(here, '..', 'space_invader')
+        p = Popen([sys.executable, 'space_invader.py'], cwd=space_invaders)
+        p.wait()
 
     def schnurren(self, obj):
         self.description = '''
