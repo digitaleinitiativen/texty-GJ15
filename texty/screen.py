@@ -9,9 +9,11 @@ HIS_FONT_SIZE = 11
 
 FONT = 'Arial'
 HISTORY_FONT = 'Courier New'
+TITLE_FONT = 'Courier New'
 
-TITLE_SIZE = 25
-TITLE_FONT_SIZE = 20
+TITLE_SIZE = 40
+TITLE_FONT_SIZE = 35
+TITLE_COLOR = (0, 255, 0, 255)
 TITLE = "Munckin Cat Milky Way Odyssey"
 
 
@@ -55,9 +57,14 @@ class Screen(cocos.layer.Layer):
         self.label = None
         self.redraw_label()
         self.already_in_history = set()
-        #self.title = cocos.text.Label(
-        #    TITLE,
-        #    font_name=''
+        self.title = cocos.text.Label(
+            TITLE,
+            font_name=TITLE_FONT,
+            font_size=TITLE_FONT_SIZE,
+            width=width(),
+            color=TITLE_COLOR)
+        self.title.position = (width() - self.title.element.content_width) / 2, height() - TITLE_SIZE - 10
+        self.add(self.title)
 
     def text(self, text):
         if not text in self.already_in_history:
