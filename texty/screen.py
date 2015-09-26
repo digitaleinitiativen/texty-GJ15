@@ -67,7 +67,8 @@ class Screen(cocos.layer.Layer):
         self.redraw_label()
 
     def text(self, text):
-        text = text.replace("\n", "")
+        text = text.replace("\n", " ")
+        text = " ".join(text.split())
         if not text in self.already_in_history:
             self.history.add_text(text)
             self.already_in_history.add(text)
