@@ -42,6 +42,7 @@ class Animation(cocos.layer.Layer):
         self.bullet_move_step = height()
 
         self.bullets = []
+        self.shots = 0
 
         self.asteroids = []
         
@@ -112,6 +113,7 @@ class Animation(cocos.layer.Layer):
         bullet.scale = 1
         bullet.position = (self.spaceship.position[0],self.spaceship.position[1]+self.spaceship.height)
         bullet.do(Repeat(MoveBy((0,self.bullet_move_step),self.bullet_move_duration)))
+        self.shots += 1
         self.add(bullet, z=1)
         self.bullets.append(bullet)
 
@@ -169,7 +171,8 @@ class Animation(cocos.layer.Layer):
         self.remove_bullets()
         self.spaceship_position()
         self.move_spaceship()
-
+        if self.shots > 30:
+            self.exit(True)
         if pyglet.window.key.SPACE in self.keys_pressed :
             self.shot()
             self.keys_pressed.remove(pyglet.window.key.SPACE)
