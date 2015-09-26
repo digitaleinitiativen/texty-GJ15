@@ -19,7 +19,8 @@ sich Herr Katz und stürzt sich mit einem “Auf und drauf” ins Getümmel.
         super().__init__(description,
                          actions={},
                          objects={
-                             'miniraumschiff': []
+                             'miniraumschiff': [],
+                             'katzenklappe': []
                          })
 
     def spielen(self, obj=None):
@@ -35,6 +36,10 @@ für ihn bereitsteht. Tja, Freunde, wollen wir ein Spiel spielen?
     def umsehen(self, obj):
         if obj == 'miniraumschiff':
             self.description = 'Du siehst das miniraumschiff an und hast lust damit zu spielen'
+        elif obj == 'katzenklappe':
+            self.description = '''Du kommst leider nicht an die Katzenklappe
+            heran weil ein Weltraumsternstaubsaugervertreter mit seiner
+            Staubsaugeramada davor ist'''
         else:
             self.description = '''
     Der werte Herr Katze sieht sich um und entdeckt eine mysteriös funkelnde
