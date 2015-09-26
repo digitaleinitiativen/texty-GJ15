@@ -35,7 +35,11 @@ class Node:
     def do(self, action):
         print('Aktion: {0}'.format(action))
         if not action.action:
-            self.description = random.choice(random_actions)
+            self.description = (
+                random.choice(random_actions) +
+                '\n\n...\n\n' +
+                self._initial_description
+            )
             return self
 
         if hasattr(self, action.action):
@@ -59,3 +63,12 @@ def change_description(description):
     def do_change(node):
         node.description = description
     return do_change
+
+
+class GameOverNode(Node):
+    def do(self, action):
+        return self
+
+
+def game_over(description):
+    return GameOverNode(description + '\n\nGAME OVER', actions={})

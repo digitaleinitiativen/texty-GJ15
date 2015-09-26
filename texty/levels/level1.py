@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from texty.graph import Node, Action, change_description
+from texty.graph import Node, Action, change_description, game_over
 
 
 class Level(Node):
@@ -30,10 +30,13 @@ Teller'''
     def schnurren(self, obj=None):
         self.description = '''
 Oh, dies dünkt den Herr Katz ganz annehmbar. Molback, da fängt der Seckel doch
-glatt an zu schnurren. Wie inspirierend das Schnurren doch immer ist. Hilfreich, äußerst hilfreich.
+glatt an zu schnurren. Wie praktisch, dass ihm ein Laserpointerlicht aufgeht.
 '''
 
     def fressen(self, obj):
+        if not obj:
+            self.description = 'Du musst dich entscheiden was du essen willst'
+            return
         if obj == 'filet':
             self.description = '''
 nomnomnomnomnomnomnomnom, ploetzlich, ein greller Blitz am Himmel, ein
@@ -57,6 +60,8 @@ wenn er von A nach B kommen wollen würde.
     '''
             self.actions[Action('beamen', 'portal')] = self.next_level
             self.actions[Action('beamen', None)] = self.next_level
+        else:
+            return game_over('Du isst {0} und stribst daran'.format(obj))
 
 
 level1 = Level(
