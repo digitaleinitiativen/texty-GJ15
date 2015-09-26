@@ -38,7 +38,6 @@ class MainScreen():
             self.history,
             KeyDisplay(callback, self.history)
         )
-        self.main_scene = cocos.scene.Scene(self.screen, self.history, KeyDisplay(callback, self.history))
 
     def run(self):
         cocos.director.director.run(self.main_scene)
