@@ -1,5 +1,6 @@
 
-from texty.graph import Node
+from texty.graph import Node, Game
+from texty.catch_letters.catchletters import CatchLettersGame
 
 
 class Level(Node):
@@ -13,6 +14,17 @@ Katz, nein der Herr Katz, der weiß das nicht. Noch nicht. Hocherhobenen
 Schwanzes, tanzt er über die Straße.
 '''
         super().__init__(description, actions={}, objects={})
+
+    def tanzen(self, obj=None):
+        def exit(won=False):
+            if won:
+                self.description = 'Flatsch'
+            else:
+                self.description = 'Du hast verloren'
+        return Game(
+            CatchLettersGame,
+            exit
+        )
 
 
 

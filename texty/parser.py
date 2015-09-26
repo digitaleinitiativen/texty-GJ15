@@ -41,6 +41,9 @@ class Parser:
             "kämpfen",
             "getümmel"
         ],
+        'tanzen': [
+            'tanz',
+        ],
         "fressen":
             [
                 "frisst",
