@@ -1,4 +1,5 @@
-﻿import cocos
+﻿import os
+import cocos
 from cocos.actions import *
 from background import Background
 #from cocos.actions import *
@@ -6,6 +7,7 @@ from background import Background
 import pyglet
 from pyglet.window import key
 from pyglet.window.key import KeyStateHandler
+
 
 
 def width():
@@ -29,7 +31,7 @@ class Animation(cocos.layer.Layer):
         self.spaceship_move = None
         self.spaceship_move_duration = 2
         self.spaceship_move_step = 200
-        self.spaceship = cocos.sprite.Sprite('graphics/spaceship.png')
+        self.spaceship = cocos.sprite.Sprite('spaceship.png')
         self.spaceship.position = (width()/2, 100)
         self.spaceship.scale = 1
         
@@ -88,13 +90,13 @@ class Animation(cocos.layer.Layer):
         
     def init_asteroid(self,x,y):
         if y == 0:
-            asteroid = cocos.sprite.Sprite('graphics/asteroids/small/a300{0:02}.png'.format(x))
+            asteroid = cocos.sprite.Sprite('asteroids/small/a300{0:02}.png'.format(x))
         elif y == 1:
-            asteroid = cocos.sprite.Sprite('graphics/asteroids/small/a400{0:02}.png'.format(x))
+            asteroid = cocos.sprite.Sprite('asteroids/small/a400{0:02}.png'.format(x))
         elif y == 2:
-            asteroid = cocos.sprite.Sprite('graphics/asteroids/small/b100{0:02}.png'.format(x))
+            asteroid = cocos.sprite.Sprite('asteroids/small/b100{0:02}.png'.format(x))
         else:
-            asteroid = cocos.sprite.Sprite('graphics/asteroids/small/b400{0:02}.png'.format(x))
+            asteroid = cocos.sprite.Sprite('asteroids/small/b400{0:02}.png'.format(x))
         asteroid.scale = 1
         asteroid.position = asteroid.width/2 + x * asteroid.width, height() - y * asteroid.height - asteroid.height/2 
         self.add(asteroid,z=0)
@@ -104,7 +106,7 @@ class Animation(cocos.layer.Layer):
         
 
     def shot(self):
-        bullet = cocos.sprite.Sprite('graphics/asteroids/small/a10000.png')
+        bullet = cocos.sprite.Sprite('asteroids/small/a10000.png')
         bullet.scale = 1
         bullet.position = (self.spaceship.position[0],self.spaceship.position[1]+self.spaceship.height)
         bullet.do(Repeat(MoveBy((0,self.bullet_move_step),self.bullet_move_duration)))
@@ -176,13 +178,20 @@ class SpaceInvader():
         self.animation_layer = Animation()
         self.background_layer = Background()
 
-        self.background_layer.image = 'graphics/space.jpg'
+        self.background_layer.image = 'space.jpg'
 
     def main_scene(self):
         return cocos.scene.Scene(self.background_layer,self.animation_layer)
 
 
 def main():
+
+    here = os.path.abspath(os.path.dirname(__file__))
+    graphics = os.path.join(here, 'graphics')
+
+    import pyglet.resource
+    pyglet.resource.path = [graphics]
+    pyglet.resource.reindex()
 
     cocos.director.director.init()
 
