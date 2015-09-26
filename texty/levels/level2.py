@@ -3,7 +3,7 @@
 
 import os
 import sys
-from texty.graph import Node
+from texty.graph import Node, Action
 from subprocess import Popen
 
 
@@ -35,6 +35,11 @@ sich Herr Katz und stürzt sich mit einem “Auf und Drauf” ins Getümmel als 
         space_invaders = os.path.join(here, '..', 'space_invader')
         p = Popen([sys.executable, 'space_invader.py'], cwd=space_invaders)
         p.wait()
+        self.description = '''
+Hokus Pokus Fidibus und schon war die Milchstraße um einen WRSSSV weniger.
+Körig. Zeit weiterzuziehen, beamen, wie auch immer.'''
+        self.actions[Action('beamen', 'portal')] = self.next_level
+        self.actions[Action('beamen', None)] = self.next_level
 
     def schnurren(self, obj):
         self.description = '''
