@@ -72,7 +72,8 @@ class Parser:
         for word in capwords:
             for action, action_deriv in Parser.actions.items():
                 if word in action_deriv:
-                    print (word)
+                    return action
+                elif word == action:
                     return action
         return None
 
