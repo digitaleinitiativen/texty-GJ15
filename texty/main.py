@@ -7,13 +7,14 @@ class Main():
 
     def __init__(self):
         self.node = n1
-        s = MainScreen(self.got_text)
-        s.text(self.node.description)
-        s.run()
+        self.screen = MainScreen(self.got_text)
+        self.screen.text(self.node.description)
+        self.screen.run()
 
     def got_text(self, text):
         p = Parser(text)
         self.node = self.node.do(p.match())
+        self.screen.text(self.node.description)
 
 
 def main():
