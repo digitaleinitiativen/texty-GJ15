@@ -14,10 +14,6 @@ Oh, dies dünkt den Herr Katz ganz annehmbar. Molback, da fängt der Seckel doch
 glatt an zu schnurren. Wie praktisch, dass ihm ein Laserpointerlicht aufgeht.
 '''
 
-    def _activate_portal(self, obj):
-        self.description = 'auf die plaetze, feuer, flammer, beamergeschwindigkeit, los!'
-        self.actions[Action('beamen', 'portal')] = self.next_level
-
     def fressen(self, obj):
         if obj == 'filet':
             self.description = '''
@@ -38,7 +34,7 @@ aufmerksam" sagt der Gegenwarts Herr Katz "Flieht ihr Narren! Am besten durch
 glitzerne Katzenklappen Wink mit dem Zaunpfal" sagt der Zukunfts Herr Katz und
 verschwindet in einer dicken, nach Fisch stinkenden Rauchwolke.
     '''
-            self.actions[Action('aktivieren', 'portal')] = self._activate_portal
+            self.actions[Action('beamen', 'portal')] = self.next_level
 
 
 level1 = Level(

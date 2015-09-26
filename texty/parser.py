@@ -1,27 +1,29 @@
-import re
+
 from texty.graph import Action
 
 class Parser:
-    
-    objects = [
-        "katzenfutter", 
-        "karton", 
-        "raum",
-        "staubsauger",
-        "filet",
-        "portal"
-    ]
-    
-    actions = { 
-    "fressen": 
+
+    objects = {
+        "katzenfutter": [],
+        "karton": [],
+        "raum": [],
+        "staubsauger": [],
+        "filet": [],
+        "portal": [
+            'katzenklappe'
+        ]
+    }
+
+    actions = {
+    "fressen":
         [
-            "frisst", 
-            "essen", 
-            "friss", 
-            "iss", 
-            "fress", 
-            "ess", 
-            "fresse", 
+            "frisst",
+            "essen",
+            "friss",
+            "iss",
+            "fress",
+            "ess",
+            "fresse",
             "esse"
         ],
     "schnurren":
@@ -38,7 +40,8 @@ class Parser:
     "beamen":
         [
             "beame",
-            "beam"
+            "beam",
+            "betreten",
         ],
     "umsehen":
         [
@@ -51,25 +54,24 @@ class Parser:
             "schlaf",
             "schlafe"
         ]
-    }    
-    
-    
+    }
+
     def __init__(self, inputStr):
         self.inputStr = inputStr.lower()
-    
+
     def match(self):
-        action = self.match_action()
-        obj = self.match_object()
+        words = self.inputStr.split()
+        action = self._match(words, Parser.actions)
+        obj = self._match(words, Parser.objects)
         return Action(action, obj)
-        
-    def match_action(self):
-        capwords = self.inputStr.split()
-        for word in capwords:
-            for action, action_deriv in Parser.actions.items():
-                if word in action_deriv:
-                    return action
-                elif word == action:
-                    return action
+
+    def _match(self, words, possibilities):
+        for word in words:
+            for name, synonyms in possibilities.items():
+                if word in synonyms:
+                    return name
+                elif word == name:
+                    return name
         return None
 
     def match_object(self):
