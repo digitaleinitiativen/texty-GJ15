@@ -8,7 +8,10 @@ from texty.graph import Node, game_over
 class Level(Node):
     def __init__(self):
         description = '''
-auf die Plaetze, Feuer, fertig, Flamme, schlafende Katze-wird-von-Staubsauger-überrascht-Geschwindigkeit, los!'''
+Auf die Plätze, Feuer, fertig, Flamme, schlafende-Katze-wird-von-Staubsauger-überrascht-Geschwindigkeit, los! 
+So war der Herr Katz also durch die zweite Klappe gebeamt. Als seine
+Augen sich an das Neongeflacker gewöhnt haben, findet er sich in einem
+runden Raum mit 4 Ecken wieder. In jeder eine Katzenklappe. Ein Reisebüro also. '''
         super().__init__(description,
                          actions={},
                          objects={})
@@ -22,9 +25,6 @@ auf die Plaetze, Feuer, fertig, Flamme, schlafende Katze-wird-von-Staubsauger-ü
 
     def umsehen(self, obj=None):
         self.description = '''
-So war der Herr Katz also durch die zweite Klappe gebeamt. Als seine
-Augen sich an das grelle Licht gewöhnt haben, findet er sich in einem
-runden Raum mit 4 Ecken wieder. In jeder eine Katzenklappe. Ein Reisebüro also. 
 Er starrt in das katzenhafte Gesicht einer Katze. Fräulein Travelpussy
 liest er auf dem  Namensschild. Macht Sinn. Denn Fräulein
 Travelpussy mag Traveling und Puzzeln. “MauMauMauMauMau” mauzt Herr Katz.
