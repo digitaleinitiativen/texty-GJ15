@@ -30,6 +30,7 @@ class Parser:
         [
             "schnurrt",
             "schnurr",
+            "schnurra",
             "schnurre",
         ],
     "aktivieren":
@@ -46,12 +47,16 @@ class Parser:
     "umsehen":
         [
             "herumsehen",
+            "schau herum",
+            "umma schaua",
+            "umhersehen",
             "güggseln",
             "lugen"
         ],
     "schlafen":
         [
             "schlaf",
+            "schlofa",
             "schlafe"
         ]
     }
@@ -72,6 +77,11 @@ class Parser:
                     return name
                 elif word == name:
                     return name
+                if name in self.inputStr:
+                    return name
+                for synonym in synonyms:
+                    if synonym in self.inputStr:
+                        return name
         return None
 
     def match_object(self):
