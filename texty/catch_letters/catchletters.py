@@ -33,10 +33,11 @@ class CatchLetters(cocos.layer.Layer):
         
         # 0 = finished; 1 = running
         self.game_state = 1
+        self.keys_after_finished = 0
         
-    def on_key_press(self, key, modifiers):
+    def on_text(self, key):
         if self.game_state >= 1:
-            if ord(self.letter_layer.random_letter) == key:
+            if self.letter_layer.random_letter == key:
                 self.letter_layer.update()
                 self.cat_layer.next_cat()
                 self.true_answ += 1
@@ -44,13 +45,21 @@ class CatchLetters(cocos.layer.Layer):
                 self.wrong_answ +=1
                 if self.wrong_answ >= 3:
                     self.cat_layer.show_dead_cat()
-                    self.game_state = 0
-                    self.exit(False)
+                    self.game_state = -1
             
             if self.true_answ >= 6:
                 self.cat_layer.show_happy_cat()
+                self.letter_layer.remove(self.letter_layer.text)
                 self.game_state = 0
-                self.exit(True)
+
+    def on_key_release(self, key, modifiers):
+        if self.game_state < 1:
+            self.keys_after_finished += 1
+            if self.keys_after_finished >= 2:
+                if self.game_state == 0:
+                    self.exit(True)
+                else:
+                    self.exit(False)
     
     def move_letter(self, dt):
         if self.game_state >= 1:
