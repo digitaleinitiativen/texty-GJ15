@@ -1,4 +1,5 @@
 ﻿import cocos
+from texty.layers.background import Background
 from cocos.actions import *
 import pyglet
 from pyglet.window import key
@@ -20,18 +21,25 @@ class Animation(cocos.layer.Layer):
 
         super(Animation, self).__init__()
 
-        self.move_speed = 0.1
-        self.move_step = 10
+        self.spaceship_move = None
+        self.spaceship_move_speed = 0.1
+        self.spaceship_move_step = 10
         self.spaceship = cocos.sprite.Sprite('graphics/spaceship.png')
         self.spaceship.position = (320, 240)
         self.spaceship.scale = 1
         
+        self.bullet_move = None
+        self.bullet_move_speed = 0.1
+        self.bullet_move_step = 20
+
         self.bullets = []
 
-        self.spaceship_move = None
-
+        self.asteroids = []
+        
         self.add(self.spaceship, z=1)
         self.keys_pressed = set()
+
+        self.init_asteroids()
 
         self.schedule(self.update)
 
@@ -62,11 +70,40 @@ class Animation(cocos.layer.Layer):
         """
         self.keys_pressed.discard(key)
 
+    def init_asteroids(self):
+        i = 0
+        j = 0
+        while i < 10:
+            self.asteroids.append([])
+            while j < 5:
+                self.asteroids[i].append(self.init_asteroid(i,j))
+                j += 1
+            j = 0
+            i += 1
+
+        
+    def init_asteroid(self,x,y):
+        if y == 0:
+            asteroid = cocos.sprite.Sprite('graphics/asteroids/small/a300{0:02}.png'.format(x))
+        elif y == 1:
+            asteroid = cocos.sprite.Sprite('graphics/asteroids/small/a400{0:02}.png'.format(x))
+        elif y == 2:
+            asteroid = cocos.sprite.Sprite('graphics/asteroids/small/b100{0:02}.png'.format(x))
+        else:
+            asteroid = cocos.sprite.Sprite('graphics/asteroids/small/b400{0:02}.png'.format(x))
+        asteroid.scale = 1
+        asteroid.position = asteroid.width/2 + x * asteroid.width, height() - y * asteroid.height - asteroid.height/2 
+        self.add(asteroid,z=0)
+        asteroid.do(Repeat(RotateBy(180,2)))
+        return asteroid
+
+        
+
     def shot(self):
         bullet = cocos.sprite.Sprite('graphics/asteroids/small/a10000.png')
         bullet.scale = 1
-        bullet.position = self.spaceship.position
-        bullet.do(Repeat(MoveBy((0,self.move_step),self.move_speed)))
+        bullet.position = (self.spaceship.position[0],self.spaceship.position[1]+self.spaceship.height)
+        bullet.do(Repeat(MoveBy((0,self.bullet_move_step),self.bullet_move_speed)))
         self.add(bullet, z=1)
         self.bullets.append(bullet)
 
@@ -87,20 +124,37 @@ class Animation(cocos.layer.Layer):
             self.spaceship.do(Place( (0,self.spaceship.position[1])))
             if self.spaceship_move:
                 self.spaceship.do((self.spaceship_move))
+        if self.spaceship.position[1] < 0:
+            self.spaceship.stop
+            self.spaceship.do(Place( (self.spaceship.position[0],height())))
+            if self.spaceship_move:
+                self.spaceship.do((self.spaceship_move))
+        if self.spaceship.position[1] > height():
+            self.spaceship.stop
+            self.spaceship.do(Place( (self.spaceship.position[0],0)))
+            if self.spaceship_move:
+                self.spaceship.do((self.spaceship_move))
 
     def move_spaceship(self):
-        if pyglet.window.key.LEFT in self.keys_pressed :
-            self.spaceship_move = MoveBy((self.move_step * (-1),0),self.move_speed)
-        if pyglet.window.key.RIGHT in self.keys_pressed :
-            self.spaceship_move = MoveBy((self.move_step,0),self.move_speed)
-        if pyglet.window.key.UP in self.keys_pressed :
-            self.spaceship_move = MoveBy((0,self.move_step),self.move_speed)
-        if pyglet.window.key.DOWN in self.keys_pressed :
-            self.spaceship_move = MoveBy((0,self.move_step *(-1)),self.move_speed)
+        x = 0
+        y = 0
 
-        if self.spaceship_move: 
-            self.spaceship.do((self.spaceship_move))
-        
+        if pyglet.window.key.LEFT in self.keys_pressed :
+            x = self.spaceship_move_step * (-1)
+        if pyglet.window.key.RIGHT in self.keys_pressed :
+            x = self.spaceship_move_step
+        if pyglet.window.key.UP in self.keys_pressed :
+            y = self.spaceship_move_step
+        if pyglet.window.key.DOWN in self.keys_pressed :
+            y = self.spaceship_move_step * (-1)
+
+
+        if x != 0 or y != 0 :
+            self.spaceship_move = MoveBy((x,y),self.spaceship_move_speed)
+            self.spaceship.do(self.spaceship_move)
+        elif self.spaceship_move:
+            self.spaceship.do(self.spaceship_move)
+   
 
 
     def update(self,dt):
@@ -109,6 +163,7 @@ class Animation(cocos.layer.Layer):
         self.move_spaceship()
         if pyglet.window.key.SPACE in self.keys_pressed :
             self.shot()
+            self.keys_pressed.remove(pyglet.window.key.SPACE)
        
 
 def main():
@@ -117,6 +172,7 @@ def main():
 
     # We create a new layer, an instance of SpaceInvader
     animation_layer = Animation()
+    #background_layer = 
    # shots_layer = Shots()
 
     # tell the layer to perform a Rotate action in 10 seconds.
