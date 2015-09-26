@@ -3,71 +3,68 @@ from texty.graph import Action
 
 class Parser:
 
-    objects = {
-        "katzenfutter": [],
-        "karton": [],
-        "raum": [],
-        "staubsauger": [],
-        "filet": [],
-        "portal": [
-            'katzenklappe'
-        ]
-    }
-
     actions = {
-    "fressen":
-        [
-            "frisst",
-            "essen",
-            "friss",
-            "iss",
-            "fress",
-            "ess",
-            "fresse",
-            "esse"
+        "hilfe": [],
+        "holen": [
+            'hola'
         ],
-    "schnurren":
-        [
-            "schnurrt",
-            "schnurr",
-            "schnurra",
-            "schnurre",
-        ],
-    "aktivieren":
-        [
-            "aktiviere",
-            "auslösen"
-        ],
-    "beamen":
-        [
-            "beame",
-            "beam",
-            "betreten",
-        ],
-    "umsehen":
-        [
-            "herumsehen",
-            "schau herum",
-            "umma schaua",
-            "umhersehen",
-            "güggseln",
-            "lugen"
-        ],
-    "schlafen":
-        [
-            "schlaf",
-            "schlofa",
-            "schlafe"
-        ]
+        "fressen":
+            [
+                "frisst",
+                "essen",
+                "friss",
+                "iss",
+                "fress",
+                "ess",
+                "fresse",
+                "esse"
+            ],
+        "schnurren":
+            [
+                "schnurrt",
+                "schnurr",
+                "schnurra",
+                "schnurre",
+            ],
+        "aktivieren":
+            [
+                "aktiviere",
+                "auslösen"
+            ],
+        "beamen":
+            [
+                "beame",
+                "beam",
+                "betreten",
+            ],
+        "umsehen":
+            [
+                "herumsehen",
+                "schau herum",
+                "umma schaua",
+                "umhersehen",
+                "güggseln",
+                "lugen",
+                "aschaua",
+                "anschauen",
+                "ansehen"
+            ],
+        "schlafen":
+            [
+                "schlaf",
+                "schlofa",
+                "schlafe"
+            ]
     }
 
-    def __init__(self, inputStr):
+    def __init__(self, inputStr, objects):
         self.inputStr = inputStr.lower()
+        self.objects = objects
 
     def match(self):
         words = self.inputStr.split()
         action = self._match(words, Parser.actions)
-        obj = self._match(words, Parser.objects)
+        obj = self._match(words, self.objects)
         return Action(action, obj)
 
     def _match(self, words, possibilities):

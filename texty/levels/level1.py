@@ -1,12 +1,31 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from texty.graph import Node, Action, change_description
+from texty.graph import Node, Action, change_description, game_over
 
 
 class Level(Node):
-    def __init__(self, description, actions, move_to=None):
-        super().__init__(description, actions, move_to)
+    def __init__(self, description, actions):
+        super().__init__(description,
+                         actions,
+                         objects={
+                             'filet': [],
+                             'katzenklappe': [],
+                             'katzentoilette': [],
+                             'wäsche': []
+                         })
+        self.background = 'level1.jpg'
+
+    def umsehen(self, obj=None):
+        if not obj:
+            self.description = '''
+Der werte Herr Katze sieht sich um und entdeckt eine mysteriös funkelnde
+Katzenklappe, ein hässliches Potpourri, eine Katzentoilette, einen Stapel
+frisch gebügelter Wäsche, ein Filet auf einem geblümelten Villeroy und Boch
+Teller'''
+        else:
+            self.description = ('Du siehst {0} an aber findest es langweilig.'
+                                'Du bist hungrig'.format(obj))
 
     def schnurren(self, obj=None):
         self.description = '''
@@ -15,6 +34,9 @@ glatt an zu schnurren. Wie praktisch, dass ihm ein Laserpointerlicht aufgeht.
 '''
 
     def fressen(self, obj):
+        if not obj:
+            self.description = 'Du musst dich entscheiden was du essen willst'
+            return
         if obj == 'filet':
             self.description = '''
 nomnomnomnomnomnomnomnom, ploetzlich, ein greller Blitz am Himmel, ein
@@ -38,6 +60,8 @@ wenn er von A nach B kommen wollen würde.
     '''
             self.actions[Action('beamen', 'portal')] = self.next_level
             self.actions[Action('beamen', None)] = self.next_level
+        else:
+            return game_over('Du isst {0} und stribst daran'.format(obj))
 
 
 level1 = Level(
@@ -50,11 +74,6 @@ versonnen seine Eier und jagte von Zeit zu Zeit seinen eigenen Schwanz.
 Erfolglos. Ja, so war er, der Herr Katz. Gestern Abend also, da saß er so in
 seinem Wohnzimmer. Orientierungslos. Hoechste Zeit sich umzusehen.''',
     actions={
-        Action('umsehen', None): change_description('''
-Der werte Herr Katze sieht sich um und entdeckt eine mysteriös funkelnde
-Katzenklappe, ein hässliches Potpourri, eine Katzentoilette, einen Stapel
-frisch gebügelter Wäsche, ein Filet auf einem geblümelten Villeroy und Boch
-Teller'''),
         Action('schlafen', None): change_description('''
 zzzzz, mau, zzzzz, mau, zzzzz, mau, zzzz, mau, wuff "oh I forgot how to cat",
 zzzz, mau, zzzz, mau'''),

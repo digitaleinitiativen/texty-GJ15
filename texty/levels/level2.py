@@ -21,15 +21,15 @@ sich Herr Katz und stürzt sich mit einem “Auf und drauf” ins Getümmel.
     def schnurren(self, obj):
         self.description = '''
 Oh, dies dünkt den Herr Katz ganz annehmbar. Molback, da fängt der Seckel doch
-glatt an zu schnurren. Wie praktisch, dass ein Miniraumschiff mit Katzensitz
-für ihn bereitsteht.
+glatt an zu schnurren. Wie praktisch, dass ein Miniraumschiff in katzengerechter Größe
+für ihn bereitsteht. Tja, Freunde, wollen wir ein Spiel spielen?
 '''
 
     def umsehen(self, obj):
         self.description = '''
 Der werte Herr Katze sieht sich um und entdeckt eine mysteriös funkelnde
-Katzenklappe, einen Weltraumsternstaubsaugervertreter mit stockhä, eine
-Staubsaugerarmada
+Katzenklappe, einen Weltraumsternstaubsaugervertreter mit einer
+Staubsaugerarmada, wie praktisch wäre jetzt ein wenig Inspiration...schnurr, schnurr...
 '''
 
 level2 = Level()
