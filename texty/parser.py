@@ -4,12 +4,12 @@ from texty.graph import Action
 class Parser:
     
     objects = [
-        "Katzenfutter", 
-        "Karton", 
-        "Raum",
-        "Staubsauger",
-        "Filet",
-        "Portal",
+        "katzenfutter", 
+        "karton", 
+        "raum",
+        "staubsauger",
+        "filet",
+        "portal"
     ]
     
     actions = { 
@@ -32,7 +32,6 @@ class Parser:
         ],
     "aktivieren":
         [
-            "aktivieren",
             "aktiviere",
             "auslösen"
         ],
@@ -43,10 +42,6 @@ class Parser:
         ],
     "umsehen":
         [
-            "sieh um",
-            "schau um",
-            "sehe um",
-            "umsehen",
             "herumsehen",
             "güggseln",
             "lugen"
@@ -60,7 +55,7 @@ class Parser:
     
     
     def __init__(self, inputStr):
-        self.inputStr = inputStr
+        self.inputStr = inputStr.lower()
     
     def match(self):
         action = self.match_action()
