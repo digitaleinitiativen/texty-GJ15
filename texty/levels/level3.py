@@ -22,6 +22,12 @@ runden Raum mit 4 Ecken wieder. In jeder eine Katzenklappe. Ein Reisebüro also.
             return self.next_level
         return game_over('katzenbox game over')
 
+    def schnurren(self, obj=None):
+        self.description = '''
+Oh, dies dünkt den Herr Katz ganz annehmbar. Molback, da fängt der Seckel doch
+glatt an zu schnurren. In der Hoffnung, mit der richtigen Antwort, durch das
+richtige Tor zu kommen.
+'''
 
     def umsehen(self, obj=None):
         self.description = '''
