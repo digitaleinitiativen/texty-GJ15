@@ -1,17 +1,11 @@
-
-
 import cocos
-
-
-class HelloWorld(cocos.layer.Layer):
-    def __init__(self):
-        super(HelloWorld, self).__init__()
+from .screen import Screen
 
 
 def main():
     cocos.director.director.init()
-    h = HelloWorld()
-    main_scene = cocos.scene.Scene(h)
+    s = Screen()
+    main_scene = cocos.scene.Scene(s)
     cocos.director.director.run(main_scene)
 
 
