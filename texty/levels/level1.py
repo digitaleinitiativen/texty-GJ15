@@ -37,6 +37,7 @@ denn das einzige was zählt ist: "Was würde Spock aus Raumschiff Enterprise tun
 wenn er von A nach B kommen wollen würde.
     '''
             self.actions[Action('beamen', 'portal')] = self.next_level
+            self.actions[Action('beamen', None)] = self.next_level
 
 
 level1 = Level(
