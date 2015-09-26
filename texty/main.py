@@ -1,4 +1,4 @@
-from texty.graph import n1
+from texty.levels import level1
 from texty.parser import Parser
 from .screen import MainScreen
 
@@ -6,7 +6,7 @@ from .screen import MainScreen
 class Main():
 
     def __init__(self):
-        self.node = n1
+        self.node = level1
         self.screen = MainScreen(self.got_text)
         self.screen.text(self.node.description)
         self.screen.run()
