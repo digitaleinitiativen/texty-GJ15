@@ -420,6 +420,7 @@
     <Content Include="texty\space_invader\graphics\asteroids\small\b40013.png" />
     <Content Include="texty\space_invader\graphics\asteroids\small\b40014.png" />
     <Content Include="texty\space_invader\graphics\asteroids\small\b40015.png" />
+    <Content Include="texty\space_invader\graphics\space.jpg" />
     <Content Include="texty\space_invader\graphics\spaceship.png" />
     <Content Include="versions.cfg" />
   </ItemGroup>

@@ -22,5 +22,5 @@ class Background(Layer):
         if not val:
             return
 
-        self._image = image = Sprite(val, opacity=100, anchor=(0, 0))
+        self._image = image = Sprite(val, opacity=255, anchor=(0, 0))
         self.add(image)

@@ -1,6 +1,8 @@
 ﻿import cocos
 from cocos.actions import *
 from background import Background
+#from cocos.actions import *
+#from cocos import actions, layer, sprite, scene
 import pyglet
 from pyglet.window import key
 from pyglet.window.key import KeyStateHandler
@@ -22,23 +24,24 @@ class Animation(cocos.layer.Layer):
 
         super(Animation, self).__init__()
 
+        self.keys_pressed = set()
+
         self.spaceship_move = None
-        self.spaceship_move_speed = 0.1
-        self.spaceship_move_step = 10
+        self.spaceship_move_duration = 2
+        self.spaceship_move_step = 200
         self.spaceship = cocos.sprite.Sprite('graphics/spaceship.png')
         self.spaceship.position = (width()/2, 100)
         self.spaceship.scale = 1
         
         self.bullet_move = None
-        self.bullet_move_speed = 0.1
-        self.bullet_move_step = 20
+        self.bullet_move_duration = 3
+        self.bullet_move_step = height()
 
         self.bullets = []
 
         self.asteroids = []
         
-        self.add(self.spaceship, z=1)
-        self.keys_pressed = set()
+        self.add(self.spaceship, z=0)
 
         self.init_asteroids()
 
@@ -104,7 +107,7 @@ class Animation(cocos.layer.Layer):
         bullet = cocos.sprite.Sprite('graphics/asteroids/small/a10000.png')
         bullet.scale = 1
         bullet.position = (self.spaceship.position[0],self.spaceship.position[1]+self.spaceship.height)
-        bullet.do(Repeat(MoveBy((0,self.bullet_move_step),self.bullet_move_speed)))
+        bullet.do(Repeat(MoveBy((0,self.bullet_move_step),self.bullet_move_duration)))
         self.add(bullet, z=1)
         self.bullets.append(bullet)
 
@@ -115,7 +118,7 @@ class Animation(cocos.layer.Layer):
                 self.bullets.remove(bullet)
 
     def spaceship_position(self):
-        if self.spaceship.position[0] < 0:
+        if self.spaceship.position[0] <= 0:
             self.spaceship.stop
             self.spaceship.do(Place( (width(),self.spaceship.position[1])))
             if self.spaceship_move:
@@ -125,7 +128,7 @@ class Animation(cocos.layer.Layer):
             self.spaceship.do(Place( (0,self.spaceship.position[1])))
             if self.spaceship_move:
                 self.spaceship.do((self.spaceship_move))
-        if self.spaceship.position[1] < 0:
+        if self.spaceship.position[1] <= 0:
             self.spaceship.stop
             self.spaceship.do(Place( (self.spaceship.position[0],height())))
             if self.spaceship_move:
@@ -151,7 +154,7 @@ class Animation(cocos.layer.Layer):
 
 
         if x != 0 or y != 0 :
-            self.spaceship_move = MoveBy((x,y),self.spaceship_move_speed)
+            self.spaceship_move = MoveBy((x,y),self.spaceship_move_duration)
             self.spaceship.do(self.spaceship_move)
         elif self.spaceship_move:
             self.spaceship.do(self.spaceship_move)
@@ -162,37 +165,30 @@ class Animation(cocos.layer.Layer):
         self.remove_bullets()
         self.spaceship_position()
         self.move_spaceship()
+
         if pyglet.window.key.SPACE in self.keys_pressed :
             self.shot()
             self.keys_pressed.remove(pyglet.window.key.SPACE)
        
 
+class SpaceInvader():
+    def __init__(self):
+        self.animation_layer = Animation()
+        self.background_layer = Background()
+
+        self.background_layer.image = 'graphics/space.jpg'
+
+    def main_scene(self):
+        return cocos.scene.Scene(self.background_layer,self.animation_layer)
+
+
 def main():
-    # director init takes the same arguments as pyglet.window
+
     cocos.director.director.init()
 
-    # We create a new layer, an instance of SpaceInvader
-    animation_layer = Animation()
-    background_layer = Background()
+    game = SpaceInvader()
 
-    background_layer.image = 'graphics/space.jpg'
-
-    #background_layer = 
-   # shots_layer = Shots()
-
-    # tell the layer to perform a Rotate action in 10 seconds.
-    #test_layer.do(RotateBy(360, duration=10))
-
-    # A scene that contains the layer test_layer
-    main_scene = cocos.scene.Scene(background_layer,animation_layer)
-
-
-    # And now, start the application, starting with main_scene
-    cocos.director.director.run(main_scene)
-
-    # or you could have written, without so many comments:
-    #      director.run( cocos.scene.Scene( SpaceInvader() ) )
-
+    cocos.director.director.run(game.main_scene())
 
 
 
