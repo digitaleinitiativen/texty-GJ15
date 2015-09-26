@@ -1,19 +1,24 @@
-
+from texty.graph import n1
+from texty.parser import Parser
 from .screen import MainScreen
-from .text_mode import main as text_main
 
-def got_text(text):
-    print(text)
+
+class Main():
+
+    def __init__(self):
+        self.node = n1
+        s = MainScreen(self.got_text)
+        s.text(self.node.description)
+        s.run()
+
+    def got_text(self, text):
+        p = Parser(text)
+        self.node = self.node.do(p.match())
 
 
 def main():
-    text_main()
+    Main()
 
-
-def graph_main():
-    s = MainScreen(got_text)
-    s.text('Hello World!')
-    s.run()
 
 if __name__ == '__main__':
     main()
