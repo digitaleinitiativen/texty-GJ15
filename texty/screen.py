@@ -47,9 +47,12 @@ class Screen(cocos.layer.Layer):
         self.history = history
         self.label = None
         self.redraw_label()
+        self.already_in_history = set()
 
     def text(self, text):
-        self.history.add_text(text)
+        if not text in self.already_in_history:
+            self.history.add_text(text)
+            self.already_in_history.add(text)
         self.label.element.text = text
 
     def on_resize(self, width, height):
@@ -112,7 +115,6 @@ class History(cocos.layer.ScrollableLayer):
     def autoscroll(self):
         if self.label.element.content_height > height() - 10:
             self.label.position = (0, self.label.element.content_height - height())
-            print(self.label.position)
 
 
 class KeyDisplay(cocos.layer.Layer):
