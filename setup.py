@@ -9,5 +9,11 @@ requirements = [
 
 setup(
     name='texty',
+    packages=['texty'],
+    entry_points={
+        'console_scripts': [
+            'texty = texty.main:main'
+        ]
+    },
     install_requires=requirements
 )
