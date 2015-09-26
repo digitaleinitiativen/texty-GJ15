@@ -7,6 +7,13 @@ FONT_SIZE = 15
 HIS_WIDTH = 240
 HIS_FONT_SIZE = 11
 
+FONT = 'Arial'
+HISTORY_FONT = 'Courier New'
+
+TITLE_SIZE = 25
+TITLE_FONT_SIZE = 20
+TITLE = "Munckin Cat Milky Way Odyssey"
+
 
 def width():
     return cocos.director.director.window.width
@@ -48,6 +55,9 @@ class Screen(cocos.layer.Layer):
         self.label = None
         self.redraw_label()
         self.already_in_history = set()
+        #self.title = cocos.text.Label(
+        #    TITLE,
+        #    font_name=''
 
     def text(self, text):
         if not text in self.already_in_history:
@@ -66,10 +76,10 @@ class Screen(cocos.layer.Layer):
         else:
             text = ''
         self.label = cocos.text.Label(text,
-            font_name='Times New Roman',
+            font_name=FONT,
             font_size=FONT_SIZE,
-            anchor_x='left', anchor_y='top', multiline=True, width=width() - 10)
-        self.label.position = HIS_WIDTH + 10, height() - 10
+            anchor_x='left', anchor_y='top', multiline=True, width=width() - 10 - HIS_WIDTH)
+        self.label.position = HIS_WIDTH + 10, height() - 10 - TITLE_SIZE
         self.add(self.label)
         self.draw()
 
@@ -98,13 +108,13 @@ class History(cocos.layer.ScrollableLayer):
         else:
             text = ''
         self.label = cocos.text.Label(text,
-                                      font_name='Times New Roman',
+                                      font_name=HISTORY_FONT,
                                       font_size=HIS_FONT_SIZE,
                                       anchor_x='left',
                                       anchor_y='top',
                                       multiline=True,
                                       width=HIS_WIDTH,
-                                      x=10, y=height() - 10)
+                                      x=10, y=height() - 10 - TITLE_SIZE)
         self.add(self.label)
         self.autoscroll()
 
@@ -115,7 +125,7 @@ class History(cocos.layer.ScrollableLayer):
 
     def autoscroll(self):
         if self.label.element.content_height > height() - 10:
-            self.label.position = (0, self.label.element.content_height - height())
+            self.label.position = (0, self.label.element.content_height - height() - 10 - TITLE_SIZE)
 
 
 class KeyDisplay(cocos.layer.Layer):
@@ -127,7 +137,7 @@ class KeyDisplay(cocos.layer.Layer):
         self.callback = callback
         self.history = history
 
-        self.text_label = cocos.text.Label("", x=HIS_WIDTH + 10, y=5, font_size=FONT_SIZE)
+        self.text_label = cocos.text.Label("", x=HIS_WIDTH + 10, y=5 + TITLE_SIZE, font_size=FONT_SIZE)
         self.text = DEFAULT_INPUT
 
         self.update_text()
