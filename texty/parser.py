@@ -3,8 +3,61 @@ from texty.graph import Action
 
 class Parser:
     
-    objects = ["Katzenfutter", "Karton", "Raum"]
-    actions = ["fressen", "trinken", "gehen", "schnurren", "miauen"]
+    objects = [
+        "Katzenfutter", 
+        "Karton", 
+        "Raum",
+        "Staubsauger",
+        "Filet",
+        "Portal",
+    ]
+    
+    actions = { 
+    "fressen": 
+        [
+            "frisst", 
+            "essen", 
+            "friss", 
+            "iss", 
+            "fress", 
+            "ess", 
+            "fresse", 
+            "esse"
+        ],
+    "schnurren":
+        [
+            "schnurrt",
+            "schnurr",
+            "schnurre",
+        ],
+    "aktivieren":
+        [
+            "aktivieren",
+            "aktiviere",
+            "auslösen"
+        ],
+    "beamen":
+        [
+            "beame",
+            "beam"
+        ],
+    "umsehen":
+        [
+            "sieh um",
+            "schau um",
+            "sehe um",
+            "umsehen",
+            "herumsehen",
+            "güggseln",
+            "lugen"
+        ],
+    "schlafen":
+        [
+            "schlaf",
+            "schlafe"
+        ]
+    }    
+    
     
     def __init__(self, inputStr):
         self.inputStr = inputStr
@@ -17,8 +70,10 @@ class Parser:
     def match_action(self):
         capwords = self.inputStr.split()
         for word in capwords:
-            if word in Parser.actions:
-                return word
+            for action, action_deriv in Parser.actions.items():
+                if word in action_deriv:
+                    print (word)
+                    return action
         return None
 
     def match_object(self):
