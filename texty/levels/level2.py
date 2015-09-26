@@ -16,7 +16,11 @@ nächsten Katzenklappe positoniert hatte und nicht den Anschein erweckte, als ob
 er sich in diesem Lichtjahr noch bewegen würde. “Verflixt und zugenäht” denkt
 sich Herr Katz und stürzt sich mit einem “Auf und drauf” ins Getümmel.
 '''
-        super().__init__(description, {}, None)
+        super().__init__(description,
+                         actions={},
+                         objects={
+                             'miniraumschiff': []
+                         })
 
     def schnurren(self, obj):
         self.description = '''
@@ -26,10 +30,13 @@ für ihn bereitsteht. Tja, Freunde, wollen wir ein Spiel spielen?
 '''
 
     def umsehen(self, obj):
-        self.description = '''
-Der werte Herr Katze sieht sich um und entdeckt eine mysteriös funkelnde
-Katzenklappe, einen Weltraumsternstaubsaugervertreter mit einer
-Staubsaugerarmada, wie praktisch wäre jetzt ein wenig Inspiration...schnurr, schnurr...
-'''
+        if obj == 'miniraumschiff':
+            self.description = 'Du siehst das miniraumschiff an und hast lust damit zu spielen'
+        else:
+            self.description = '''
+    Der werte Herr Katze sieht sich um und entdeckt eine mysteriös funkelnde
+    Katzenklappe, einen Weltraumsternstaubsaugervertreter mit einer
+    Staubsaugerarmada, wie praktisch wäre jetzt ein wenig Inspiration...schnurr, schnurr...
+    '''
 
 level2 = Level()
