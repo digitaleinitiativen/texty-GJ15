@@ -2,7 +2,7 @@ import pyglet
 import cocos
 from texty.layers.background import Background
 
-DEFAULT_INPUT = 'Eingabe: '
+DEFAULT_INPUT = 'Was willst du tun? '
 FONT_SIZE = 15
 HIS_WIDTH = 240
 HIS_FONT_SIZE = 11
