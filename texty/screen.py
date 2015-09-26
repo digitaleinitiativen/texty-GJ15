@@ -94,12 +94,14 @@ class KeyDisplay(cocos.layer.Layer):
         self.text += char
         self.update_text()
 
+    def on_key_press(self, key, modifiers):
+        if key == pyglet.window.key.BACKSPACE and self.text != DEFAULT_INPUT:
+            self.text = self.text[:-1]
+            self.update_text()
+
     def on_key_release(self, key, modifiers):
         if key == pyglet.window.key.RETURN:
             self.submit()
-        elif key == pyglet.window.key.BACKSPACE and self.text != DEFAULT_INPUT:
-            self.text = self.text[:-1]
-            self.update_text()
 
     def update_text(self):
         self.text_label.element.text = self.text
