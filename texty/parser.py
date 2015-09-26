@@ -1,6 +1,7 @@
 
 from texty.graph import Action
 
+
 class Parser:
 
     actions = {
@@ -9,7 +10,13 @@ class Parser:
             'hola'
         ],
         "spielen": [
-            "spiela"
+            "spiela",
+            "einsteigen",
+            "auf ins getümmel",
+            "fliegen",
+            "flieg",
+            "kämpfen",
+            "getümmel"
         ],
         "fressen":
             [
@@ -57,7 +64,8 @@ class Parser:
             [
                 "schlaf",
                 "schlofa",
-                "schlafe"
+                "schlafe",
+                "pennen"
             ]
     }
 
