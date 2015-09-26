@@ -16,6 +16,10 @@ random_actions = [
     'Herr Katz trägt jetzt Damenunterwäsche.'
 ]
 
+class Game:
+    def __init__(self, game_cls, exit):
+        self.game_cls = game_cls
+        self.exit = exit
 
 class Node:
 
@@ -32,8 +36,10 @@ class Node:
     def hilfe(self, obj):
         self.description = self._initial_description
 
+    def do_raw_input(self, text):
+        return None
+
     def do(self, action):
-        print('Aktion: {0}'.format(action))
         if not action.action:
             self.description = (
                 random.choice(random_actions) +
