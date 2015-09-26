@@ -9,9 +9,11 @@ HIS_FONT_SIZE = 11
 
 FONT = 'Arial'
 HISTORY_FONT = 'Courier New'
+TITLE_FONT = 'Courier New'
 
-TITLE_SIZE = 25
-TITLE_FONT_SIZE = 20
+TITLE_SIZE = 40
+TITLE_FONT_SIZE = 35
+TITLE_COLOR = (0, 255, 0, 255)
 TITLE = "Munckin Cat Milky Way Odyssey"
 
 
@@ -36,7 +38,6 @@ class MainScreen():
             self.history,
             KeyDisplay(callback, self.history)
         )
-        self.main_scene = cocos.scene.Scene(self.screen, self.history, KeyDisplay(callback, self.history))
 
     def run(self):
         cocos.director.director.run(self.main_scene)
@@ -53,11 +54,15 @@ class Screen(cocos.layer.Layer):
         super(Screen, self).__init__()
         self.history = history
         self.label = None
-        self.redraw_label()
         self.already_in_history = set()
-        #self.title = cocos.text.Label(
-        #    TITLE,
-        #    font_name=''
+        self.title = cocos.text.Label(
+            TITLE,
+            font_name=TITLE_FONT,
+            font_size=TITLE_FONT_SIZE,
+            width=width(),
+            color=TITLE_COLOR)
+        self.add(self.title)
+        self.redraw_label()
 
     def text(self, text):
         if not text in self.already_in_history:
@@ -80,6 +85,7 @@ class Screen(cocos.layer.Layer):
             font_size=FONT_SIZE,
             anchor_x='left', anchor_y='top', multiline=True, width=width() - 10 - HIS_WIDTH)
         self.label.position = HIS_WIDTH + 10, height() - 10 - TITLE_SIZE
+        self.title.position = (width() - self.title.element.content_width) / 2, height() - TITLE_SIZE - 10
         self.add(self.label)
         self.draw()
 
@@ -114,7 +120,7 @@ class History(cocos.layer.ScrollableLayer):
                                       anchor_y='top',
                                       multiline=True,
                                       width=HIS_WIDTH,
-                                      x=10, y=height() - 10 - TITLE_SIZE)
+                                      x=10, y=height() - 10 + TITLE_SIZE)
         self.add(self.label)
         self.autoscroll()
 
