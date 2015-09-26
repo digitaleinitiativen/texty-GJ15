@@ -212,6 +212,12 @@ class Animation(cocos.layer.Layer):
             obj.cshape = cm.AARectShape(eu.Vector2(obj.position[0], obj.position[1]), obj.width/2,obj.height/2)
             self.collision_manager.add(obj) 
 
+        if not self.asteroids:
+            self.exit(True)
+
+        if self.shots > 300:
+            self.exit(False)
+
 class SpaceInvader():
     def __init__(self,exit_callback):
         self.animation_layer = Animation(exit_callback)
