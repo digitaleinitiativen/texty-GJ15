@@ -3,6 +3,8 @@
 
 from texty.graph import Node
 from .level1 import level1
+from .level2 import level2
 
-
-level1.next_level = Node(description='Game Over', actions={})
+game_over = Node(description='Game Over', actions={})
+level1.next_level = level2
+level2.next_level = game_over
