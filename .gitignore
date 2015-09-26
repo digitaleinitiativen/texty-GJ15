@@ -3,4 +3,4 @@
 bin/
 develop-eggs/
 texty.egg-info/
-texty/__pycache__/
+__pycache__
