@@ -92,7 +92,7 @@ class Animation(cocos.layer.Layer):
     def init_asteroids(self):
         i = 0
         j = 0
-        while i < 10:
+        while i < 16:
             while j < 5:
                 self.init_asteroid(i,j)
                 j += 1
@@ -108,10 +108,10 @@ class Animation(cocos.layer.Layer):
         asteroid.name = "ASTEROID"
         asteroid.do(Repeat(RotateBy(180,2)))
         
-        if y == 4 :
-            self.collision_manager.add(asteroid)
-            self.asteroids.append(asteroid)
-            self.add(asteroid,z=0)
+        
+        self.collision_manager.add(asteroid)
+        self.asteroids.append(asteroid)
+        self.add(asteroid,z=0)
 
         
 
@@ -119,11 +119,11 @@ class Animation(cocos.layer.Layer):
         bullet = cocos.sprite.Sprite('asteroids/small/a10000.png')
         bullet.scale = 1
         bullet.position = (self.spaceship.position[0],self.spaceship.position[1]+self.spaceship.height)
-        bullet.cshape = cm.CircleShape(eu.Vector2(bullet.position[0], bullet.position[1]), bullet.width/2)
+        bullet.cshape = cm.AARectShape(eu.Vector2(bullet.position[0], bullet.position[1]), bullet.width/2,bullet.height/2)
         bullet.do(Repeat(MoveBy((0,self.bullet_move_step),self.bullet_move_duration)))
         bullet.name = "BULLET"
-        self.collision_manager.add(bullet)
         self.shots += 1
+        self.collision_manager.add(bullet)
         self.add(bullet, z=1)
         self.bullets.append(bullet)
 
@@ -132,7 +132,6 @@ class Animation(cocos.layer.Layer):
             if bullet.position[1] > height():
                 self.remove(bullet)
                 self.bullets.remove(bullet)
-                self.collision_manager.remove_tricky
 
     def spaceship_position(self):
         if self.spaceship.position[0] <= 0:
@@ -207,12 +206,11 @@ class Animation(cocos.layer.Layer):
             self.exit(False)
 
         for obj in self.asteroids:
+            obj.cshape = cm.AARectShape(eu.Vector2(obj.position[0], obj.position[1]), obj.width/2,obj.height/2)
             self.collision_manager.add(obj) 
         for obj in self.bullets:
+            obj.cshape = cm.AARectShape(eu.Vector2(obj.position[0], obj.position[1]), obj.width/2,obj.height/2)
             self.collision_manager.add(obj) 
-       
-        if not self.asteroids or self.shots >= 30:
-            self.exit(True)
 
 class SpaceInvader():
     def __init__(self,exit_callback):
@@ -233,8 +231,7 @@ def main():
     pyglet.resource.path = [graphics]
     pyglet.resource.reindex()
 
-    cocos.director.director.init()
-
+    cocos.director.director.init(resizable=True, autoscale=False, width=1024, height=800)
     game = SpaceInvader(sys.exit)
 
     cocos.director.director.run(game.main_scene())
