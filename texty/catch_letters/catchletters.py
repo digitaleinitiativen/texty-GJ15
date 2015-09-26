@@ -130,13 +130,24 @@ class CatchLettersGame():
         return cocos.scene.Scene(self.scene, self.letter, self.cat)
 
 
-def main():
-    cocos.director.director.init()
+def exit(won=False):
+    if won is False:
+        run()
+    else:
+        sys.exit()
+
+
+def run():
     cat = CatDisplay()
     letter = LetterDisplay()
-    exit_callback = None
+    exit_callback = exit
     main_scene = CatchLetters(cat, letter, exit_callback)
     cocos.director.director.run(cocos.scene.Scene(main_scene, letter, cat))
+
+
+def main():
+    cocos.director.director.init(width=800, height=640)
+    run()
 
 if __name__ == '__main__':
     main()
