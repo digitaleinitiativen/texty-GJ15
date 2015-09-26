@@ -19,10 +19,11 @@ random_actions = [
 
 class Node:
 
-    def __init__(self, description, actions, move_to=None):
+    def __init__(self, description, actions, objects=None, move_to=None):
         self._initial_description = self.description = description
         self.actions = actions
         self.background = None
+        self.objects = objects or {}
         self.move_to = move_to or self._default_move_to
 
     def _default_move_to(self):

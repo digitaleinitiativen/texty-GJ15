@@ -3,19 +3,11 @@ from texty.graph import Action
 
 class Parser:
 
-    objects = {
-        "katzenfutter": [],
-        "karton": [],
-        "raum": [],
-        "staubsauger": [],
-        "filet": [],
-        "portal": [
-            'katzenklappe'
-        ]
-    }
-
     actions = {
         "hilfe": [],
+        "holen": [
+            'hola'
+        ],
         "fressen":
             [
                 "frisst",
@@ -52,7 +44,10 @@ class Parser:
                 "umma schaua",
                 "umhersehen",
                 "güggseln",
-                "lugen"
+                "lugen",
+                "aschaua",
+                "anschauen",
+                "ansehen"
             ],
         "schlafen":
             [
@@ -62,13 +57,14 @@ class Parser:
             ]
     }
 
-    def __init__(self, inputStr):
+    def __init__(self, inputStr, objects):
         self.inputStr = inputStr.lower()
+        self.objects = objects
 
     def match(self):
         words = self.inputStr.split()
         action = self._match(words, Parser.actions)
-        obj = self._match(words, Parser.objects)
+        obj = self._match(words, self.objects)
         return Action(action, obj)
 
     def _match(self, words, possibilities):

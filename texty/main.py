@@ -24,7 +24,7 @@ class Main():
         self.screen.run()
 
     def got_text(self, text):
-        p = Parser(text)
+        p = Parser(text, self.node.objects)
         self.node = self.node.do(p.match())
         self.screen.text(self.node.description)
         if self.node.background:
