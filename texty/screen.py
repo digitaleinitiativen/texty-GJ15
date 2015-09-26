@@ -15,7 +15,7 @@ def height():
 class MainScreen():
 
     def __init__(self, callback):
-        cocos.director.director.init()
+        cocos.director.director.init(resizable=True)
         self.screen = Screen()
         self.main_scene = cocos.scene.Scene(KeyDisplay(callback), self.screen)
 
