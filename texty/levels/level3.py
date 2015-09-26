@@ -32,6 +32,6 @@ Als erstes kommt eine Katze. Räudigen Türsteherkatze sagt:"16", worauf die Kat
 sagt. Dann kommt eine Katze. Räudige Türsteherkatze sagt:"28"
 und Katze sagt:"14". Als eine Katze kommt, sagt räudige Türsteherkatze:"8" und bekommt als Antwort:"4". Alle dürfen passieren.
 Ach so, das ist ja einfach, denkt die Katze und antwortet auf Katzes Frage:"12" lässig "6" und wird umgehend
-verhaftet. Was hätte er wohl sagen müssen?'''
+verhaftet. Was hätte er wohl sagen müssen? a)5 b)5 c)29038 oder d)10'''
 
 level3 = Level()
