@@ -46,6 +46,7 @@ class Parser:
                 "schau herum",
                 "umma schaua",
                 "umhersehen",
+                "umschauen",
                 "güggseln",
                 "lugen",
                 "aschaua",
