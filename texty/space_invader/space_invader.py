@@ -164,10 +164,10 @@ class Animation(cocos.layer.Layer):
             x = self.spaceship_move_step * (-1)
         if pyglet.window.key.RIGHT in self.keys_pressed :
             x = self.spaceship_move_step
-        if pyglet.window.key.UP in self.keys_pressed :
-            y = self.spaceship_move_step
-        if pyglet.window.key.DOWN in self.keys_pressed :
-            y = self.spaceship_move_step * (-1)
+        #if pyglet.window.key.UP in self.keys_pressed :
+        #    y = self.spaceship_move_step
+        #if pyglet.window.key.DOWN in self.keys_pressed :
+        #     y = self.spaceship_move_step * (-1)
 
 
         if x != 0 or y != 0 :
