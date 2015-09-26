@@ -7,8 +7,10 @@ FONT_SIZE = 15
 HIS_WIDTH = 240
 HIS_FONT_SIZE = 11
 
-FONT = 'Courier New'
 HISTORY_FONT = 'Courier New'
+HISTORY_COLOR = (255, 255, 255, 155)
+
+FONT = 'Courier New'
 TITLE_FONT = 'Courier New'
 
 TITLE_SIZE = 40
@@ -122,6 +124,7 @@ class History(cocos.layer.ScrollableLayer):
                                       anchor_y='top',
                                       multiline=True,
                                       width=HIS_WIDTH,
+                                      color=HISTORY_COLOR,
                                       x=10, y=height() - TITLE_SIZE - 30)
         self.add(self.label)
         self.autoscroll()
@@ -145,7 +148,7 @@ class KeyDisplay(cocos.layer.Layer):
         self.callback = callback
         self.history = history
 
-        self.text_label = cocos.text.Label("", x=HIS_WIDTH + 10, y=5 + TITLE_SIZE, font_size=FONT_SIZE)
+        self.text_label = cocos.text.Label("", x=HIS_WIDTH + 10, y=5 + TITLE_SIZE, font_size=FONT_SIZE, font_name=FONT)
         self.text = DEFAULT_INPUT
 
         self.update_text()
