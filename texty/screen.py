@@ -2,7 +2,7 @@ import pyglet
 import cocos
 from texty.layers.background import Background
 
-DEFAULT_INPUT = 'Eingabe: '
+DEFAULT_INPUT = 'Was willst du tun? '
 FONT_SIZE = 15
 HIS_WIDTH = 240
 HIS_FONT_SIZE = 11
@@ -85,7 +85,7 @@ class Screen(cocos.layer.Layer):
             font_size=FONT_SIZE,
             anchor_x='left', anchor_y='top', multiline=True, width=width() - 10 - HIS_WIDTH)
         self.label.position = HIS_WIDTH + 10, height() - 10 - TITLE_SIZE
-        self.title.position = (width() - self.title.element.content_width) / 2, height() - TITLE_SIZE - 10
+        self.title.position = HIS_WIDTH + 10, height() - TITLE_SIZE - 10
         self.add(self.label)
         self.draw()
 

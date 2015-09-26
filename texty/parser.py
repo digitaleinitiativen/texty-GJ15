@@ -8,6 +8,9 @@ class Parser:
         "holen": [
             'hola'
         ],
+        "spielen": [
+            "spiela"
+        ],
         "fressen":
             [
                 "frisst",
