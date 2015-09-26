@@ -1,9 +1,10 @@
 ﻿import cocos
-from texty.layers.background import Background
 from cocos.actions import *
+from background import Background
 import pyglet
 from pyglet.window import key
 from pyglet.window.key import KeyStateHandler
+
 
 def width():
     return cocos.director.director.window.width
@@ -25,7 +26,7 @@ class Animation(cocos.layer.Layer):
         self.spaceship_move_speed = 0.1
         self.spaceship_move_step = 10
         self.spaceship = cocos.sprite.Sprite('graphics/spaceship.png')
-        self.spaceship.position = (320, 240)
+        self.spaceship.position = (width()/2, 100)
         self.spaceship.scale = 1
         
         self.bullet_move = None
@@ -172,6 +173,10 @@ def main():
 
     # We create a new layer, an instance of SpaceInvader
     animation_layer = Animation()
+    background_layer = Background()
+
+    background_layer.image = 'graphics/space.jpg'
+
     #background_layer = 
    # shots_layer = Shots()
 
@@ -179,7 +184,7 @@ def main():
     #test_layer.do(RotateBy(360, duration=10))
 
     # A scene that contains the layer test_layer
-    main_scene = cocos.scene.Scene(animation_layer)
+    main_scene = cocos.scene.Scene(background_layer,animation_layer)
 
 
     # And now, start the application, starting with main_scene

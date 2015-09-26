@@ -24,14 +24,22 @@
     <Compile Include="bootstrap.py" />
     <Compile Include="setup.py" />
     <Compile Include="texty\graph.py" />
+    <Compile Include="texty\layers\background.py" />
+    <Compile Include="texty\levels\level1.py" />
+    <Compile Include="texty\levels\level2.py" />
+    <Compile Include="texty\levels\__init__.py" />
     <Compile Include="texty\main.py" />
     <Compile Include="texty\parser.py" />
     <Compile Include="texty\screen.py" />
+    <Compile Include="texty\space_invader\background.py" />
     <Compile Include="texty\space_invader\space_invader.py" />
     <Compile Include="texty\text_mode.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="texty" />
+    <Folder Include="texty\images\" />
+    <Folder Include="texty\layers\" />
+    <Folder Include="texty\levels\" />
     <Folder Include="texty\space_invader\" />
     <Folder Include="texty\space_invader\graphics\" />
     <Folder Include="texty\space_invader\graphics\asteroids\" />
@@ -43,6 +51,7 @@
     <Content Include=".gitignore" />
     <Content Include="buildout.cfg" />
     <Content Include="README.rst" />
+    <Content Include="texty\images\level1.jpg" />
     <Content Include="texty\space_invader\graphics\asteroids\large\a10000.png" />
     <Content Include="texty\space_invader\graphics\asteroids\large\a10001.png" />
     <Content Include="texty\space_invader\graphics\asteroids\large\a10002.png" />
