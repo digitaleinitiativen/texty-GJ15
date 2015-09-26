@@ -12,7 +12,7 @@ class Level(Node):
     def schnurren(self, obj=None):
         self.description = '''
 Oh, dies dünkt den Herr Katz ganz annehmbar. Molback, da fängt der Seckel doch
-glatt an zu schnurren. Wie praktisch, dass ihm ein Laserpointerlicht aufgeht.
+glatt an zu schnurren. Wie inspirierend das Schnurren doch immer ist. Hilfreich, äußerst hilfreich.
 '''
 
     def fressen(self, obj):
