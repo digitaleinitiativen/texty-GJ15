@@ -22,6 +22,9 @@ sich Herr Katz und stürzt sich mit einem “Auf und drauf” ins Getümmel.
                              'miniraumschiff': []
                          })
 
+    def spielen(self, obj=None):
+        pass
+
     def schnurren(self, obj):
         self.description = '''
 Oh, dies dünkt den Herr Katz ganz annehmbar. Molback, da fängt der Seckel doch
