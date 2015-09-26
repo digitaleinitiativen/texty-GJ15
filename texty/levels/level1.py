@@ -32,7 +32,9 @@ hat" "Ich bin den Zukunfts Ich, gekommen aus der Zukunft, um dich davor zu
 bewahren morgen kastriert zu werden" sagt der Zukunfts Herr Katz "Wie
 aufmerksam" sagt der Gegenwarts Herr Katz "Flieht ihr Narren! Am besten durch
 glitzerne Katzenklappen Wink mit dem Zaunpfal" sagt der Zukunfts Herr Katz und
-verschwindet in einer dicken, nach Fisch stinkenden Rauchwolke.
+verschwindet in einer dicken, nach Fisch stinkenden Rauchwolke. Egal, denkt sich Herr Katz, 
+denn das einzige was zählt ist: "Was würde Spock aus Raumschiff Enterprise tun, 
+wenn er von A nach B kommen wollen würde.
     '''
             self.actions[Action('beamen', 'portal')] = self.next_level
 
