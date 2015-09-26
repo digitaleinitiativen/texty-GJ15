@@ -172,7 +172,7 @@ class KeyDisplay(cocos.layer.Layer):
         self.text_label.element.text = self.text
 
     def submit(self):
-        self.callback(self.text)
+        self.callback(self.text[len(DEFAULT_INPUT):])
         self.history.add_text(self.text[len(DEFAULT_INPUT):])
         self.text = DEFAULT_INPUT
         self.update_text()
