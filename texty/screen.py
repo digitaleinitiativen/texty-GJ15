@@ -54,7 +54,6 @@ class Screen(cocos.layer.Layer):
         super(Screen, self).__init__()
         self.history = history
         self.label = None
-        self.redraw_label()
         self.already_in_history = set()
         self.title = cocos.text.Label(
             TITLE,
@@ -62,8 +61,8 @@ class Screen(cocos.layer.Layer):
             font_size=TITLE_FONT_SIZE,
             width=width(),
             color=TITLE_COLOR)
-        self.title.position = (width() - self.title.element.content_width) / 2, height() - TITLE_SIZE - 10
         self.add(self.title)
+        self.redraw_label()
 
     def text(self, text):
         if not text in self.already_in_history:
@@ -86,6 +85,7 @@ class Screen(cocos.layer.Layer):
             font_size=FONT_SIZE,
             anchor_x='left', anchor_y='top', multiline=True, width=width() - 10 - HIS_WIDTH)
         self.label.position = HIS_WIDTH + 10, height() - 10 - TITLE_SIZE
+        self.title.position = (width() - self.title.element.content_width) / 2, height() - TITLE_SIZE - 10
         self.add(self.label)
         self.draw()
 
