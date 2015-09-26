@@ -34,8 +34,10 @@ class Main():
             game = new_node
             def exit(won=False):
                 game.exit(won)
-                self.screen.text(self.node.description)
                 cocos.director.director.pop()
+                self.screen.text(self.node.description)
+                if self.node.background:
+                    self.screen.background.image = self.node.background
 
             game_obj = game.game_cls(exit)
             cocos.director.director.push(game_obj.main_scene())

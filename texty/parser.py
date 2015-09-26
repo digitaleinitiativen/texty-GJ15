@@ -9,6 +9,29 @@ class Parser:
         "holen": [
             'hola'
         ],
+        'hissen': [],
+        'pumpen': [
+            'pump',
+            'pumpen',
+            'aufpumpen',
+            'aufpump',
+            'aufblasen',
+            'aufpumpen'
+        ],
+        'lesen': [
+            'lese',
+        ],
+        'pissen': [
+            'urinieren',
+            'pinkeln',
+            'soacha',
+            'katzenklo',
+            'königskatze'
+        ],
+        'licht': [
+            'licht an',
+            'es werde licht'
+        ],
         "spielen": [
             "spiela",
             "einsteigen",
@@ -17,6 +40,9 @@ class Parser:
             "flieg",
             "kämpfen",
             "getümmel"
+        ],
+        'tanzen': [
+            'tanz',
         ],
         "fressen":
             [
