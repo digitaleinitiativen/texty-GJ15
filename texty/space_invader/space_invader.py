@@ -173,8 +173,8 @@ class Animation(cocos.layer.Layer):
         if pyglet.window.key.SPACE in self.keys_pressed :
             self.shot()
             self.keys_pressed.remove(pyglet.window.key.SPACE)
-        if pyglet.window.key.ESCAPE in self.keys_pressed :
-            self.exit()
+        if pyglet.window.key.Q in self.keys_pressed :
+            self.exit(False)
        
 
 class SpaceInvader():
