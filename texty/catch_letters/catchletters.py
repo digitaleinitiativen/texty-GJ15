@@ -19,11 +19,11 @@ def width():
 def height():
     return cocos.director.director.window.height
 
-class CatchLetters(cocos.layer.Layer):
+class CatchLetters(cocos.layer.ColorLayer):
     is_event_handler = True
     
     def __init__(self, cat_layer, letter_layer, exit_callback):
-        super( CatchLetters, self ).__init__()
+        super( CatchLetters, self ).__init__(255, 255, 255, 255)
         self.exit = exit_callback
         self.cat_layer = cat_layer
         self.letter_layer = letter_layer
@@ -74,7 +74,7 @@ class LetterDisplay(cocos.layer.Layer):
         super(LetterDisplay, self).__init__()
         self.move_step = 10
         self.move_speed = 0.1
-        self.text = cocos.text.Label('', font_size=40, x=100, y=0)
+        self.text = cocos.text.Label('', font_size=40, x=100, y=0, color=(0, 0, 0, 255))
         self.update()
         self.add(self.text)
     
@@ -134,5 +134,9 @@ def main():
     cocos.director.director.init()
     cat = CatDisplay()
     letter = LetterDisplay()
+    exit_callback = None
     main_scene = CatchLetters(cat, letter, exit_callback)
     cocos.director.director.run(cocos.scene.Scene(main_scene, letter, cat))
+
+if __name__ == '__main__':
+    main()
