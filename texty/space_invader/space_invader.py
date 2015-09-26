@@ -171,20 +171,24 @@ class Animation(cocos.layer.Layer):
         if pyglet.window.key.SPACE in self.keys_pressed :
             self.shot()
             self.keys_pressed.remove(pyglet.window.key.SPACE)
+        if pyglet.window.key.ESCAPE in self.keys_pressed :
+            game.exit()
        
 
 class SpaceInvader():
-    def __init__(self):
+    def __init__(self,exit_callback):
         self.animation_layer = Animation()
         self.background_layer = Background()
 
         self.background_layer.image = 'space.jpg'
+        self.exit = exit_callback
 
     def main_scene(self):
         return cocos.scene.Scene(self.background_layer,self.animation_layer)
 
 
 def main():
+    global game
 
     here = os.path.abspath(os.path.dirname(__file__))
     graphics = os.path.join(here, 'graphics')
