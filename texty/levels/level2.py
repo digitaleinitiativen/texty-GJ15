@@ -29,6 +29,7 @@ sich Herr Katz und stürzt sich mit einem “Auf und Drauf” ins Getümmel als 
                              'miniraumschiff': [],
                              'katzenklappe': []
                          })
+        self.background = 'level2.png'
 
     def spielen(self, obj=None):
         space_invaders = os.path.join(here, '..', 'space_invader')
