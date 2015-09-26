@@ -27,6 +27,8 @@ class Main():
         p = Parser(text)
         self.node = self.node.do(p.match())
         self.screen.text(self.node.description)
+        if self.node.background:
+            self.screen.background.image = self.node.background
 
 
 def main():

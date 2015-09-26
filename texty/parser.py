@@ -15,50 +15,51 @@ class Parser:
     }
 
     actions = {
-    "fressen":
-        [
-            "frisst",
-            "essen",
-            "friss",
-            "iss",
-            "fress",
-            "ess",
-            "fresse",
-            "esse"
-        ],
-    "schnurren":
-        [
-            "schnurrt",
-            "schnurr",
-            "schnurra",
-            "schnurre",
-        ],
-    "aktivieren":
-        [
-            "aktiviere",
-            "auslösen"
-        ],
-    "beamen":
-        [
-            "beame",
-            "beam",
-            "betreten",
-        ],
-    "umsehen":
-        [
-            "herumsehen",
-            "schau herum",
-            "umma schaua",
-            "umhersehen",
-            "güggseln",
-            "lugen"
-        ],
-    "schlafen":
-        [
-            "schlaf",
-            "schlofa",
-            "schlafe"
-        ]
+        "hilfe": [],
+        "fressen":
+            [
+                "frisst",
+                "essen",
+                "friss",
+                "iss",
+                "fress",
+                "ess",
+                "fresse",
+                "esse"
+            ],
+        "schnurren":
+            [
+                "schnurrt",
+                "schnurr",
+                "schnurra",
+                "schnurre",
+            ],
+        "aktivieren":
+            [
+                "aktiviere",
+                "auslösen"
+            ],
+        "beamen":
+            [
+                "beame",
+                "beam",
+                "betreten",
+            ],
+        "umsehen":
+            [
+                "herumsehen",
+                "schau herum",
+                "umma schaua",
+                "umhersehen",
+                "güggseln",
+                "lugen"
+            ],
+        "schlafen":
+            [
+                "schlaf",
+                "schlofa",
+                "schlafe"
+            ]
     }
 
     def __init__(self, inputStr):

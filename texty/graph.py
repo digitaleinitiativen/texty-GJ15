@@ -1,13 +1,26 @@
 
+import random
 from collections import namedtuple
 
 
 Action = namedtuple('Action', ['action', 'obj'])
 
+random_actions = [
+    'den eigenen Schwanz fangen',
+    'sich tot stellen',
+    'sich putzen',
+    'kotzen',
+    'was runterschmeissen',
+    'was zerfetzen',
+    'vor die Türe setzen und warten',
+    'Starren'
+]
+
 
 class Node:
+
     def __init__(self, description, actions, move_to=None):
-        self.description = description
+        self._initial_description = self.description = description
         self.actions = actions
         self.background = None
         self.move_to = move_to or self._default_move_to
@@ -15,9 +28,13 @@ class Node:
     def _default_move_to(self):
         pass
 
+    def hilfe(self, obj):
+        self.description = self._initial_description
+
     def do(self, action):
         print('Aktion: {0}'.format(action))
-        if not action or not action.action:
+        if not action.action:
+            self.description = random.choice(random_actions)
             return self
 
         if hasattr(self, action.action):
