@@ -211,7 +211,7 @@ class Animation(cocos.layer.Layer):
         for obj in self.bullets:
             self.collision_manager.add(obj) 
        
-        if not self.asteroids:
+        if not self.asteroids or self.shots >= 30:
             self.exit(True)
 
 class SpaceInvader():
