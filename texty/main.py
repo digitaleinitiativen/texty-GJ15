@@ -1,12 +1,11 @@
 
+
 import os
 import cocos
 from texty.levels import level1
 from texty.parser import Parser
 from texty.graph import Node, Game
 from .screen import MainScreen
-from cocos.scene import Scene
-
 
 
 class Main():
@@ -21,7 +20,14 @@ class Main():
 
     def got_text(self, text):
         p = Parser(text, self.node.objects)
-        new_node = self.node.do(p.match())
+        action = p.match()
+        new_node = None
+        if not action.action:
+            t = text.lstrip('Was willst du tun?')
+            new_node = self.node.do_raw_input(t)
+        if not new_node:
+            print('Aktion: {0}'.format(action))
+            new_node = self.node.do(action)
         if isinstance(new_node, Node):
             self.node = new_node
         elif isinstance(new_node, Game):

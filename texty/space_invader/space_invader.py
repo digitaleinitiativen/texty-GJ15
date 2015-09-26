@@ -2,7 +2,12 @@
 import sys
 import cocos
 from cocos.actions import *
-from .background import Background
+
+try:
+    from .background import Background
+except ImportError:
+    from background import Background
+
 #from cocos.actions import *
 #from cocos import actions, layer, sprite, scene
 import pyglet

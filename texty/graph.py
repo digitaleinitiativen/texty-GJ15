@@ -36,8 +36,10 @@ class Node:
     def hilfe(self, obj):
         self.description = self._initial_description
 
+    def do_raw_input(self, text):
+        return None
+
     def do(self, action):
-        print('Aktion: {0}'.format(action))
         if not action.action:
             self.description = (
                 random.choice(random_actions) +

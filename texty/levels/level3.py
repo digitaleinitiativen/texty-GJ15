@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from texty.graph import Node
+from texty.graph import Node, game_over
 
 
 class Level(Node):
@@ -12,6 +12,13 @@ auf die Plaetze, Feuer, fertig, Flamme, schlafende Katze-wird-von-Staubsauger-ü
         super().__init__(description,
                          actions={},
                          objects={})
+
+    def do_raw_input(self, text):
+        print(text)
+        if str(text.strip()) in ('b', '5'):
+            return self.next_level
+        return game_over('katzenbox game over')
+
 
     def umsehen(self, obj=None):
         self.description = '''
