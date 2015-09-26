@@ -121,7 +121,7 @@ class History(cocos.layer.ScrollableLayer):
                                       anchor_y='top',
                                       multiline=True,
                                       width=HIS_WIDTH,
-                                      x=10, y=height() - 10 - TITLE_SIZE)
+                                      x=10, y=height() - 10 + TITLE_SIZE)
         self.add(self.label)
         self.autoscroll()
 
