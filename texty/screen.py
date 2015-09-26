@@ -4,6 +4,14 @@ import cocos
 DEFAULT_INPUT = 'Eingabe: '
 
 
+def width():
+    return cocos.director.director.window.width
+
+
+def height():
+    return cocos.director.director.window.height
+
+
 class MainScreen():
 
     def __init__(self, callback):
@@ -24,9 +32,9 @@ class Screen(cocos.layer.Layer):
         super(Screen, self).__init__()
         self.label = cocos.text.Label('',
             font_name='Times New Roman',
-            font_size=18,
-            anchor_x='center', anchor_y='center', multiline=True, width=320)
-        self.label.position = 160, 460
+            font_size=12,
+            anchor_x='left', anchor_y='top', multiline=True, width=width() - 10)
+        self.label.position = 10, 470
         self.add(self.label)
 
     def text(self, text):
