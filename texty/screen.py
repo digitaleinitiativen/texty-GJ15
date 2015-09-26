@@ -84,7 +84,7 @@ class History(cocos.layer.ScrollableLayer):
         self.redraw_label()
 
     def add_text(self, text):
-        self.label.element.text += text + '\n'
+        self.label.element.text += text + '\n\n\n'
         self.autoscroll()
 
     def on_resize(self, width, height):
