@@ -1,0 +1,5 @@
+.installed.cfg
+.venv/
+bin/
+develop-eggs/
+texty.egg-info/
