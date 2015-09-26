@@ -7,8 +7,10 @@ FONT_SIZE = 15
 HIS_WIDTH = 240
 HIS_FONT_SIZE = 11
 
-FONT = 'Arial'
 HISTORY_FONT = 'Courier New'
+HISTORY_COLOR = (255, 255, 255, 155)
+
+FONT = 'Courier New'
 TITLE_FONT = 'Courier New'
 
 TITLE_SIZE = 40
@@ -65,6 +67,7 @@ class Screen(cocos.layer.Layer):
         self.redraw_label()
 
     def text(self, text):
+        text = text.replace("\n", "")
         if not text in self.already_in_history:
             self.history.add_text(text)
             self.already_in_history.add(text)
@@ -83,9 +86,10 @@ class Screen(cocos.layer.Layer):
         self.label = cocos.text.Label(text,
             font_name=FONT,
             font_size=FONT_SIZE,
-            anchor_x='left', anchor_y='top', multiline=True, width=width() - 10 - HIS_WIDTH)
-        self.label.position = HIS_WIDTH + 10, height() - 10 - TITLE_SIZE
-        self.title.position = HIS_WIDTH + 10, height() - TITLE_SIZE - 10
+            anchor_x='left', anchor_y='top', multiline=True, width=width() - 10 - HIS_WIDTH,
+            align='left')
+        self.label.position = HIS_WIDTH + 10, height() - TITLE_SIZE - 30
+        self.title.position = HIS_WIDTH + 10, height() - TITLE_SIZE
         self.add(self.label)
         self.draw()
 
@@ -120,7 +124,8 @@ class History(cocos.layer.ScrollableLayer):
                                       anchor_y='top',
                                       multiline=True,
                                       width=HIS_WIDTH,
-                                      x=10, y=height() - 10 + TITLE_SIZE)
+                                      color=HISTORY_COLOR,
+                                      x=10, y=height() - TITLE_SIZE - 30)
         self.add(self.label)
         self.autoscroll()
 
@@ -131,7 +136,7 @@ class History(cocos.layer.ScrollableLayer):
 
     def autoscroll(self):
         if self.label.element.content_height > height() - 10:
-            self.label.position = (0, self.label.element.content_height - height() - 10 - TITLE_SIZE)
+            self.label.position = (0, self.label.element.content_height - height() + 50)
 
 
 class KeyDisplay(cocos.layer.Layer):
@@ -143,7 +148,7 @@ class KeyDisplay(cocos.layer.Layer):
         self.callback = callback
         self.history = history
 
-        self.text_label = cocos.text.Label("", x=HIS_WIDTH + 10, y=5 + TITLE_SIZE, font_size=FONT_SIZE)
+        self.text_label = cocos.text.Label("", x=HIS_WIDTH + 10, y=5 + TITLE_SIZE, font_size=FONT_SIZE, font_name=FONT)
         self.text = DEFAULT_INPUT
 
         self.update_text()

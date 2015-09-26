@@ -19,23 +19,23 @@ class Level(Node):
     def umsehen(self, obj=None):
         if not obj:
             self.description = '''
-Der werte Herr Katze sieht sich um und entdeckt eine mysteriös funkelnde
+Der werte Herr Katz sieht sich um und entdeckt eine mysteriös funkelnde
 Katzenklappe, ein hässliches Potpourri, eine Katzentoilette, einen Stapel
-frisch gebügelter Wäsche, ein Filet auf einem geblümelten Villeroy und Boch
-Teller'''
+frisch gebügelter Wäsche und ein well-done Filet auf einem geblümelten Villeroy und Boch
+Teller.'''
         else:
-            self.description = ('Du siehst {0} an aber findest es langweilig.'
-                                'Du bist hungrig'.format(obj))
+            self.description = ('Herr Katz starrt {0} an und starrt, und starrt, und starrt.'
+                                'Und wird hungrig'.format(obj))
 
     def schnurren(self, obj=None):
         self.description = '''
 Oh, dies dünkt den Herr Katz ganz annehmbar. Molback, da fängt der Seckel doch
-glatt an zu schnurren. Wie praktisch, dass ihm ein Laserpointerlicht aufgeht.
+glatt an zu schnurren. Aber leider hat er immer noch Hunger.
 '''
 
     def fressen(self, obj):
         if not obj:
-            self.description = 'Du musst dich entscheiden was du essen willst'
+            self.description = 'Herr Katz muss sich noch immer entscheiden was er fressen will.'
             return
         if obj == 'filet':
             self.description = '''
@@ -45,34 +45,35 @@ Leibhaftige, der einzig wahre Herr Katz. Zurueckgekehrt aus der Zukunft um sich
 selbst vor der Kastration zu retten. "Miau, sagt der Gegenwarts Herr Katz"
 "Salve du Stricher" sag der Zukunfts Herr Katz, "Woher kommst denn du" sagt der
 Gegenwarts Herr Katz, "aus der Zukunft" sagt der Zukunfts Herr Katz "Mau" sagt
-der Gegenwarts Herr Katz "Mau" sagt der Zukunfts Herr Katz "Ja wo sind denn
+der Gegenwarts Herr Katz "Mau" sagt der Zukunfts Herr Katz "Ja wo sind denn deine
 Eier, ja wo sind sie denn, ja wo, ja wo sind sie denn?" fragt der Gegenwarts
-Herr Katz "weg" antwortet der Zukunfts Herr Katz "Warum" sagt der Gegenwarts
+Herr Katz "weg" antwortet der Zukunfts Herr Katz "Warum?" sagt der Gegenwarts
 Herr Katz "Hinweis: Filet am Vorabend + Tierarzt + Morgen = ?" "Mau" sagt der
 Gegenwarts Herr Katz, der die Weisheit wirklich nicht mit dem Löffel gefresssen
-hat" "Ich bin den Zukunfts Ich, gekommen aus der Zukunft, um dich davor zu
-bewahren morgen kastriert zu werden" sagt der Zukunfts Herr Katz "Wie
+hat" "Ich bin dein Zukunfts Ich, gekommen aus der Zukunft, um dich davor zu
+bewahren morgen entmannt zu werden" sagt der Zukunfts Herr Katz "Wie
 aufmerksam" sagt der Gegenwarts Herr Katz "Flieht ihr Narren! Am besten durch
-glitzerne Katzenklappen Wink mit dem Zaunpfal" sagt der Zukunfts Herr Katz und
+glitzerne Katzenklappen" sagt der Zukunfts Herr Katz und
 verschwindet in einer dicken, nach Fisch stinkenden Rauchwolke. Egal, denkt sich Herr Katz, 
-denn das einzige was zählt ist: "Was würde Spock aus Raumschiff Enterprise tun, 
-wenn er von A nach B kommen wollen würde.
+denn das einzige was zählt ist: "Was würde Spock aus Raumschiff Enterprise jetzt tun? 
+
     '''
             self.actions[Action('beamen', 'portal')] = self.next_level
             self.actions[Action('beamen', None)] = self.next_level
         else:
-            return game_over('Du isst {0} und stribst daran'.format(obj))
+            return game_over('Herr Katz frisst {0} und stirbt daran...elendig.'.format(obj))
 
 
 level1 = Level(
     description='''
 Es war einmal vor langer Zeit, gestern, der ehrenwerte Herr Katz. Herr Katz war
-ein Lauser, also nicht sonderlich verlaust, aber dafuer hatte er Lausbefall der
-uebleren Sorte. Und er war etwas schwer von Begriff und auch in uebrigen
-Belangen. So starrte er tagein, tagaus ins Leere, leckte sich gelegentlich
-versonnen seine Eier und jagte von Zeit zu Zeit seinen eigenen Schwanz.
-Erfolglos. Ja, so war er, der Herr Katz. Gestern Abend also, da saß er so in
-seinem Wohnzimmer. Orientierungslos. Hoechste Zeit sich umzusehen.''',
+ein Lauser, nicht sonderlich verlaust, dafür hatte er Lausbefall der
+übleren Sorte. Und er war etwas schwer von Begriff. Also eigentlich strohdumm.
+So starrte er tagein, tagaus ins Leere, leckte sich gelegentlich
+versonnen seine Eier, schlief vor sich hin, fraß alles und jagte von Zeit zu Zeit seinen eigenen Schwanz.
+Erfolglos. Wenn er keinen Plan hat, also nicht mehr weiter weiß, dann schnurrt Herr Katz.
+Ja, so ist er, der Herr Katz. Gestern Abend also, da saß er so in
+seinem Wohnzimmer. Orientierungslos. Höchste Zeit sich umzuschauen.''',
     actions={
         Action('schlafen', None): change_description('''
 zzzzz, mau, zzzzz, mau, zzzzz, mau, zzzz, mau, wuff "oh I forgot how to cat",
