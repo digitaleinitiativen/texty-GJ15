@@ -15,7 +15,7 @@ def height():
 class MainScreen():
 
     def __init__(self, callback):
-        cocos.director.director.init(resizable=True)
+        cocos.director.director.init(resizable=True, autoscale=False)
         self.screen = Screen()
         self.main_scene = cocos.scene.Scene(KeyDisplay(callback), self.screen)
 
@@ -26,19 +26,34 @@ class MainScreen():
         self.screen.text(text)
 
 
-class Screen(cocos.layer.Layer):
+class Screen(cocos.layer.ScrollableLayer):
+
+    is_event_handler = True
 
     def __init__(self):
         super(Screen, self).__init__()
-        self.label = cocos.text.Label('',
-            font_name='Times New Roman',
-            font_size=12,
-            anchor_x='left', anchor_y='top', multiline=True, width=width() - 10)
-        self.label.position = 10, 470
-        self.add(self.label)
+        self.label = None
+        self.redraw_label()
 
     def text(self, text):
         self.label.element.text = text
+
+    def on_resize(self, width, height):
+        self.redraw_label()
+
+    def redraw_label(self):
+        text = None
+        if self.label:
+            text = self.label.element.text
+            self.remove(self.label)
+        else:
+            text = ''
+        self.label = cocos.text.Label(text,
+            font_name='Times New Roman',
+            font_size=12,
+            anchor_x='left', anchor_y='top', multiline=True, width=width() - 10)
+        self.label.position = 10, height() - 10
+        self.add(self.label)
 
 
 class KeyDisplay(cocos.layer.Layer):
@@ -73,3 +88,4 @@ class KeyDisplay(cocos.layer.Layer):
         self.callback(self.text)
         self.text = DEFAULT_INPUT
         self.update_text()
+
