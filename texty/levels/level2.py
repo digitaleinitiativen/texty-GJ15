@@ -15,7 +15,7 @@ class Level(Node):
     def __init__(self):
         description = '''
 Wie praktisch ein Funkelglitzerkatzenklappenportal. So war der Herr Katz also durch die
-erste Klappe gebeamt. Als seine Augen sich an das grelle Licht gewöhnt hatten,
+erste Klappe mitten in den Milkyway gebeamt. Als seine Augen sich an das grelle Licht gewöhnt hatten,
 starrte er verwirrt in die glasig-ausdruckslosen Augen eines ausgebrannten
 Weltraumsternstaubsaugervertreters kurz WRSSSV, welcher sich ausgerechnet mit
 seiner Staubsaugerarmada russischen Herstellers made in Bängladasch vor der
