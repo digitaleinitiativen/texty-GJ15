@@ -6,14 +6,14 @@ from collections import namedtuple
 Action = namedtuple('Action', ['action', 'obj'])
 
 random_actions = [
-    'den eigenen Schwanz fangen',
-    'sich tot stellen',
-    'sich putzen',
-    'kotzen',
-    'was runterschmeissen',
-    'was zerfetzen',
-    'vor die Türe setzen und warten',
-    'Starren'
+    'Herr Katz versucht seinen eigenen Schwanz zu fangen. Dreht sich eins, zwei, unendlich im Kreis.',
+    'Herr Katz stellt sich tot.Warum? Weil er es kann. ',
+    'Herr Katz würde sich gerne putzen, er hat nur leider eine Katzenhaarallergie und darum niest er.',
+    'Herr Katz findet es zum Kotzen. Darum kotzt er jetzt.',
+    'Herr Katz schmeißt deine Tasse runter. Nastrovje!  ',
+    'Herr Katz zerfetzt das Klopapier. Lustig.',
+    'Herr Katz setzt sich vor die Türe und wartet bis sie aufgeht. Dann bleibt er sitzen.',
+    'Herr Katz trägt jetzt Damenunterwäsche.'
 ]
 
 
