@@ -1,80 +1,87 @@
-import re
+
 from texty.graph import Action
 
 class Parser:
-    
-    objects = [
-        "Katzenfutter", 
-        "Karton", 
-        "Raum",
-        "Staubsauger",
-        "Filet",
-        "Portal",
-    ]
-    
-    actions = { 
-    "fressen": 
+
+    objects = {
+        "katzenfutter": [],
+        "karton": [],
+        "raum": [],
+        "staubsauger": [],
+        "filet": [],
+        "portal": [
+            'katzenklappe'
+        ]
+    }
+
+    actions = {
+    "fressen":
         [
-            "frisst", 
-            "essen", 
-            "friss", 
-            "iss", 
-            "fress", 
-            "ess", 
-            "fresse", 
+            "frisst",
+            "essen",
+            "friss",
+            "iss",
+            "fress",
+            "ess",
+            "fresse",
             "esse"
         ],
     "schnurren":
         [
             "schnurrt",
             "schnurr",
+            "schnurra",
             "schnurre",
         ],
     "aktivieren":
         [
-            "aktivieren",
             "aktiviere",
             "auslösen"
         ],
     "beamen":
         [
             "beame",
-            "beam"
+            "beam",
+            "betreten",
         ],
     "umsehen":
         [
-            "sieh um",
-            "schau um",
-            "sehe um",
-            "umsehen",
             "herumsehen",
+            "schau herum",
+            "umma schaua",
+            "umhersehen",
             "güggseln",
             "lugen"
         ],
     "schlafen":
         [
             "schlaf",
+            "schlofa",
             "schlafe"
         ]
-    }    
-    
-    
+    }
+
     def __init__(self, inputStr):
-        self.inputStr = inputStr
-    
+        self.inputStr = inputStr.lower()
+
     def match(self):
-        action = self.match_action()
-        obj = self.match_object()
+        words = self.inputStr.split()
+        action = self._match(words, Parser.actions)
+        obj = self._match(words, Parser.objects)
         return Action(action, obj)
-        
-    def match_action(self):
-        capwords = self.inputStr.split()
-        for word in capwords:
-            for action, action_deriv in Parser.actions.items():
-                if word in action_deriv:
-                    return action
-                elif word == action:
-                    return action
+
+    def _match(self, words, possibilities):
+        for word in words:
+            for name, synonyms in possibilities.items():
+                if word in synonyms:
+                    return name
+                elif word == name:
+                    return name
+                if name in self.inputStr:
+                    return name
+                for synonym in synonyms:
+                    if synonym in self.inputStr:
+                        return name
         return None
 
     def match_object(self):
