@@ -7,6 +7,7 @@ from texty.graph import Node, Action, change_description
 class Level(Node):
     def __init__(self, description, actions, move_to=None):
         super().__init__(description, actions, move_to)
+        self.background = 'level1.jpg'
 
     def schnurren(self, obj=None):
         self.description = '''

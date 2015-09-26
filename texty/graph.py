@@ -9,6 +9,7 @@ class Node:
     def __init__(self, description, actions, move_to=None):
         self.description = description
         self.actions = actions
+        self.background = None
         self.move_to = move_to or self._default_move_to
 
     def _default_move_to(self):

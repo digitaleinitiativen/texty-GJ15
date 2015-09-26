@@ -1,5 +1,6 @@
 import pyglet
 import cocos
+from texty.layers.background import Background
 
 DEFAULT_INPUT = 'Eingabe: '
 FONT_SIZE = 15
@@ -21,7 +22,13 @@ class MainScreen():
         cocos.director.director.init(resizable=True, autoscale=False, width=1024, height=800)
         self.screen = Screen()
         self.history = History()
-        self.main_scene = cocos.scene.Scene(self.screen, self.history, KeyDisplay(callback))
+        self.background = Background()
+        self.main_scene = cocos.scene.Scene(
+            self.background,
+            self.screen,
+            self.history,
+            KeyDisplay(callback)
+        )
 
     def run(self):
         cocos.director.director.run(self.main_scene)
