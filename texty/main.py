@@ -51,7 +51,8 @@ def main():
 
     import pyglet.resource
     pyglet.resource.path = [images,
-                            os.path.join(here, 'space_invader', 'graphics')]
+                            os.path.join(here, 'space_invader', 'graphics'),
+                           os.path.join(here, 'catch_letters', 'sprites')]
     pyglet.resource.reindex()
     Main()
 

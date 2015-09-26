@@ -22,8 +22,9 @@ def height():
 class CatchLetters(cocos.layer.Layer):
     is_event_handler = True
     
-    def __init__(self, cat_layer, letter_layer):
+    def __init__(self, cat_layer, letter_layer, exit_callback):
         super( CatchLetters, self ).__init__()
+        self.exit = exit_callback
         self.cat_layer = cat_layer
         self.letter_layer = letter_layer
         self.wrong_answ = 0
@@ -44,17 +45,19 @@ class CatchLetters(cocos.layer.Layer):
                 if self.wrong_answ >= 3:
                     self.cat_layer.show_dead_cat()
                     self.game_state = 0
+                    self.exit(False)
             
             if self.true_answ >= 6:
                 self.cat_layer.show_happy_cat()
                 self.game_state = 0
+                self.exit(True)
     
     def move_letter(self, dt):
         if self.game_state >= 1:
             if self.letter_layer.text.position[1] >= height():
                 self.cat_layer.show_dead_cat()
             else:
-                self.letter_layer.text.do(MoveBy( (0,50), duration=0.8 ))
+                self.letter_layer.text.do(MoveBy( (0,50), duration=0.4))
         
 class LetterDisplay(cocos.layer.Layer):
     
@@ -105,11 +108,22 @@ class CatDisplay(cocos.layer.Layer):
         self.cat.position = width()/2, height()/2
         self.cat.scale = 0.3
         self.add(self.cat)
-    
+
+
+class CatchLettersGame():
+
+    def __init__(self, exit_callback):
+        self.cat = CatDisplay()
+        self.letter = LetterDisplay()
+        self.scene = CatchLetters(self.cat, self.letter, exit_callback)
+
+    def main_scene(self):
+        return cocos.scene.Scene(self.scene, self.letter, self.cat)
+
+
 def main():
     cocos.director.director.init()
     cat = CatDisplay()
     letter = LetterDisplay()
-    main_scene = CatchLetters(cat, letter)
+    main_scene = CatchLetters(cat, letter, exit_callback)
     cocos.director.director.run(cocos.scene.Scene(main_scene, letter, cat))
-    
