@@ -109,8 +109,9 @@ class History(cocos.layer.ScrollableLayer):
         self.autoscroll()
 
     def on_mouse_scroll(self, x, y, delta_x, delta_y):
-        self.label.position = (self.label.position[0],
-                               self.label.position[1] + delta_y)
+        if (self.label.element.content_height > height() and (self.label.position[1] > 0 or delta_y > 0)):
+            self.label.position = (self.label.position[0],
+                                   self.label.position[1] + delta_y)
 
     def autoscroll(self):
         if self.label.element.content_height > height() - 10:
