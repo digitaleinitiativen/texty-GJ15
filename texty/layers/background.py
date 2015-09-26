@@ -1,10 +1,12 @@
 
-
+import cocos
 from cocos.layer import Layer
 from cocos.sprite import Sprite
 
 
 class Background(Layer):
+
+    is_event_handler = True
 
     def __init__(self):
         super().__init__()
@@ -24,3 +26,7 @@ class Background(Layer):
 
         self._image = image = Sprite(val, opacity=100, anchor=(0, 0))
         self.add(image)
+        image.position = (cocos.director.director.window.width - image.width, 65)
+
+    def on_resize(self, width, height):
+        self._image.position = (cocos.director.director.window.width - self._image.width - 10, 65)
