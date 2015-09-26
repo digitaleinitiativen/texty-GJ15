@@ -14,7 +14,7 @@ Weltraumsternstaubsaugervertreters kurz WRSSSV, welcher sich ausgerechnet mit
 seiner Staubsaugerarmada russischen Herstellers made in Bängladasch vor der
 nächsten Funkelglitzerkatzenklappenportal positoniert hatte und nicht den Anschein erweckte, als ob
 er sich in diesem Lichtjahr noch bewegen würde. “Verflixt und zugenäht” denkt
-sich Herr Katz und stürzt sich mit einem “Auf und Drauf” ins Getümmel.
+sich Herr Katz und stürzt sich mit einem “Auf und Drauf” ins Getümmel als er das Miniraumschiff entdeckt.
 '''
         super().__init__(description,
                          actions={},
@@ -35,11 +35,11 @@ für ihn bereitsteht. Tja, Freunde, wollen wir ein Spiel spielen?
 
     def umsehen(self, obj):
         if obj == 'miniraumschiff':
-            self.description = 'Du siehst das miniraumschiff an und hast lust damit zu spielen'
+            self.description = 'Herr Katz sieht das miniraumschiff an und hat tierisch Lust damit zu spielen'
         elif obj == 'katzenklappe':
-            self.description = '''Du kommst leider nicht an die Katzenklappe
-            heran weil ein Weltraumsternstaubsaugervertreter mit seiner
-            Staubsaugeramada davor ist'''
+            self.description = '''So ein Pech aber auch, Herr Katz kommst leider nicht an das Funkelglitzerkatzenklappenportal
+            heran, weil ein Weltraumsternstaubsaugervertreter mit seiner
+            Staubsaugeramada davor steht.'''
         else:
             self.description = '''
     Der werte Herr Katze sieht sich um und entdeckt eine mysteriös funkelnde
