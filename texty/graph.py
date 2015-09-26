@@ -16,6 +16,10 @@ random_actions = [
     'Herr Katz trägt jetzt Damenunterwäsche.'
 ]
 
+class Game:
+    def __init__(self, game_cls, exit):
+        self.game_cls = game_cls
+        self.exit = exit
 
 class Node:
 

@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import os
-import sys
-from texty.graph import Node, Action
-from subprocess import Popen
+from texty.graph import Node, Action, Game
+from texty.space_invader.space_invader import SpaceInvader
 
 
 here = os.path.dirname(__file__)
@@ -32,14 +31,19 @@ sich Herr Katz und stürzt sich mit einem “Auf und Drauf” ins Getümmel als 
         self.background = 'level2.png'
 
     def spielen(self, obj=None):
-        space_invaders = os.path.join(here, '..', 'space_invader')
-        p = Popen([sys.executable, 'space_invader.py'], cwd=space_invaders)
-        p.wait()
-        self.description = '''
-Hokus Pokus Fidibus und schon war die Milchstraße um einen WRSSSV weniger.
-Körig. Zeit weiterzuziehen, beamen, wie auch immer.'''
-        self.actions[Action('beamen', 'portal')] = self.next_level
-        self.actions[Action('beamen', None)] = self.next_level
+        def exit(won=False):
+            if won:
+                self.actions[Action('beamen', 'portal')] = self.next_level
+                self.actions[Action('beamen', None)] = self.next_level
+                self.description = '''
+        Hokus Pokus Fidibus und schon war die Milchstraße um einen WRSSSV weniger.
+        Körig. Zeit weiterzuziehen, beamen, wie auch immer.'''
+            else:
+                self.description = 'Du hast verloren'
+        return Game(
+            SpaceInvader,
+            exit
+        )
 
     def schnurren(self, obj):
         self.description = '''
