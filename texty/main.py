@@ -1,12 +1,14 @@
-import cocos
-from .screen import Screen
+from .screen import MainScreen
+
+
+def got_text(text):
+    print(text)
 
 
 def main():
-    cocos.director.director.init()
-    s = Screen()
-    main_scene = cocos.scene.Scene(s)
-    cocos.director.director.run(main_scene)
+    s = MainScreen(got_text)
+    s.text('Hello World!')
+    s.run()
 
 
 if __name__ == '__main__':
